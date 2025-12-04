@@ -75,13 +75,13 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({ isOpen, onClose, onSave, 
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4" aria-modal="true" role="dialog">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-white p-4 sm:p-6 border-b z-10">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+        <div className="sticky top-0 bg-white dark:bg-slate-800 p-4 sm:p-6 border-b dark:border-gray-700 z-10">
           <div className="flex justify-between items-center">
-            <h3 className="text-xl font-semibold text-gray-900">{item ? 'Edit Item' : 'Add New Item'}</h3>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">{item ? 'Edit Item' : 'Add New Item'}</h3>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
               aria-label="Close modal"
             >
               <XMarkIcon className="w-6 h-6" />
@@ -91,52 +91,52 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({ isOpen, onClose, onSave, 
         <form onSubmit={handleSubmit} noValidate>
           <div className="p-4 sm:p-6 space-y-6">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
-              <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} className={`mt-1 block w-full border rounded-md shadow-sm p-2 ${errors.name ? 'border-red-500' : 'border-gray-300'}`} />
-              {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+              <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
+              <input type="text" name="name" id="name" value={formData.name} onChange={handleChange} className={`mt-1 block w-full border rounded-md shadow-sm p-2 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white ${errors.name ? 'border-red-500' : ''}`} />
+              {errors.name && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.name}</p>}
             </div>
             <div>
-              <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
-              <textarea name="description" id="description" value={formData.description} onChange={handleChange} rows={4} className={`mt-1 block w-full border rounded-md shadow-sm p-2 ${errors.description ? 'border-red-500' : 'border-gray-300'}`} />
-              {errors.description && <p className="text-red-500 text-xs mt-1">{errors.description}</p>}
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Description</label>
+              <textarea name="description" id="description" value={formData.description} onChange={handleChange} rows={4} className={`mt-1 block w-full border rounded-md shadow-sm p-2 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white ${errors.description ? 'border-red-500' : ''}`} />
+              {errors.description && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.description}</p>}
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label htmlFor="price" className="block text-sm font-medium text-gray-700">Price</label>
-                <input type="number" name="price" id="price" value={formData.price} onChange={handleChange} min="0" step="0.01" className={`mt-1 block w-full border rounded-md shadow-sm p-2 ${errors.price ? 'border-red-500' : 'border-gray-300'}`} />
-                {errors.price && <p className="text-red-500 text-xs mt-1">{errors.price}</p>}
+                <label htmlFor="price" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Price</label>
+                <input type="number" name="price" id="price" value={formData.price} onChange={handleChange} min="0" step="0.01" className={`mt-1 block w-full border rounded-md shadow-sm p-2 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white ${errors.price ? 'border-red-500' : ''}`} />
+                {errors.price && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.price}</p>}
               </div>
               <div>
-                <label htmlFor="stock" className="block text-sm font-medium text-gray-700">Stock</label>
-                <input type="number" name="stock" id="stock" value={formData.stock} onChange={handleChange} min="0" className={`mt-1 block w-full border rounded-md shadow-sm p-2 ${errors.stock ? 'border-red-500' : 'border-gray-300'}`} />
-                {errors.stock && <p className="text-red-500 text-xs mt-1">{errors.stock}</p>}
+                <label htmlFor="stock" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Stock</label>
+                <input type="number" name="stock" id="stock" value={formData.stock} onChange={handleChange} min="0" className={`mt-1 block w-full border rounded-md shadow-sm p-2 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white ${errors.stock ? 'border-red-500' : ''}`} />
+                {errors.stock && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.stock}</p>}
               </div>
             </div>
              <div>
-                <label htmlFor="category" className="block text-sm font-medium text-gray-700">Category</label>
+                <label htmlFor="category" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Category</label>
                 <select
                     name="category"
                     id="category"
                     value={formData.category}
                     onChange={handleChange}
-                    className={`mt-1 block w-full border rounded-md shadow-sm p-2 ${errors.category ? 'border-red-500' : 'border-gray-300'}`}
+                    className={`mt-1 block w-full border rounded-md shadow-sm p-2 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white ${errors.category ? 'border-red-500' : ''}`}
                 >
                     <option value="" disabled>Select a category</option>
                     {categories.map(cat => (
                     <option key={cat} value={cat}>{cat}</option>
                     ))}
                 </select>
-                {errors.category && <p className="text-red-500 text-xs mt-1">{errors.category}</p>}
+                {errors.category && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.category}</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Image</label>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Image</label>
               <div className="mt-1">
                 <ImageUpload value={formData.imageURL} onChange={handleImageChange} />
               </div>
-              {errors.imageURL && <p className="text-red-500 text-xs mt-1">{errors.imageURL}</p>}
+              {errors.imageURL && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.imageURL}</p>}
             </div>
           </div>
-          <div className="sticky bottom-0 bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
+          <div className="sticky bottom-0 bg-gray-50 dark:bg-slate-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
             <button
               type="submit"
               className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
@@ -145,7 +145,7 @@ const ItemFormModal: React.FC<ItemFormModalProps> = ({ isOpen, onClose, onSave, 
             </button>
             <button
               type="button"
-              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
+              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm"
               onClick={onClose}
             >
               Cancel

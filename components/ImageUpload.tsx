@@ -88,12 +88,12 @@ const ImageUpload: React.FC<ImageUploadProps> = ({ value, onChange }) => {
           onDragLeave={onDragLeave}
           onDrop={onDrop}
           className={`border-2 border-dashed rounded-md p-6 text-center cursor-pointer transition-colors
-            ${isDragging ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-blue-400'}`}
+            ${isDragging ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/50' : 'border-gray-300 dark:border-gray-600 hover:border-blue-400 dark:hover:border-blue-500'}`}
         >
-          <div className="flex flex-col items-center justify-center space-y-2 text-gray-500">
+          <div className="flex flex-col items-center justify-center space-y-2 text-gray-500 dark:text-gray-400">
             <ArrowUpTrayIcon className="w-10 h-10" />
             <p className="text-sm">
-              <span className="font-semibold text-blue-600">Click to upload</span> or drag and drop
+              <span className="font-semibold text-blue-600 dark:text-blue-400">Click to upload</span> or drag and drop
             </p>
             <p className="text-xs">PNG, JPG, GIF up to 10MB</p>
           </div>

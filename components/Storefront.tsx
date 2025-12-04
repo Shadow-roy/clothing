@@ -21,26 +21,28 @@ const Storefront: React.FC = () => {
   return (
     <div className="space-y-8">
       <div className="text-center pt-4">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800">Welcome to Our Store</h1>
-        <p className="mt-2 text-lg text-gray-600">Your one-stop shop for all your daily needs.</p>
+        <h1 className="text-4xl md:text-5xl font-bold text-slate-800 dark:text-slate-100 font-serif">Discover Your Style</h1>
+        <p className="mt-3 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">Curated collections for the modern woman. Find pieces that tell your story.</p>
       </div>
 
-      <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md">
-        <div className="flex flex-col gap-4">
-             <CategoryFilter
-                categories={['All', ...categories]}
-                selectedCategory={selectedCategory}
-                onSelectCategory={setSelectedCategory}
-            />
+      <div className="sticky top-[65px] z-30 py-4 bg-gray-50/80 dark:bg-slate-900/80 backdrop-blur-sm">
+        <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-4">
+            <div className="w-full sm:w-56 flex-shrink-0">
+                <CategoryFilter
+                    categories={['All', ...categories]}
+                    selectedCategory={selectedCategory}
+                    onSelectCategory={setSelectedCategory}
+                />
+            </div>
             <div className="relative w-full">
                 <input
                     type="text"
-                    placeholder="Search for items..."
+                    placeholder="Search for dresses, tops, etc..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 border border-gray-200 bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
+                    className="w-full pl-12 pr-4 py-3 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-slate-800 dark:text-slate-100 placeholder-gray-400 dark:placeholder-gray-500 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm"
                 />
-                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                <MagnifyingGlassIcon className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-gray-500" />
             </div>
         </div>
       </div>
@@ -53,8 +55,8 @@ const Storefront: React.FC = () => {
         </div>
       ) : (
         <div className="text-center py-16">
-            <h2 className="text-xl font-semibold text-gray-700">No items found</h2>
-            <p className="text-gray-500 mt-2">Try adjusting your search or filter.</p>
+            <h2 className="text-xl font-semibold text-slate-700 dark:text-slate-300">No items found</h2>
+            <p className="text-slate-500 dark:text-slate-400 mt-2">Try adjusting your search or filter.</p>
         </div>
       )}
     </div>

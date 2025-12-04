@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
-import { User } from '../types';
+import { User, CustomerDetails } from '../types';
 import { INITIAL_USERS, USERS_KEY, CURRENT_USER_KEY } from '../constants';
 
 interface AuthContextState {
@@ -16,6 +16,8 @@ interface AuthContextState {
   removeAdmin: (id: string) => { success: boolean, message?: string };
   adminPassword?: string;
   updatePassword: (newPassword: string) => void;
+  updateUserProfile: (data: { username?: string, customerDetails?: CustomerDetails }) => { success: boolean, message?: string };
+  changePassword: (currentPassword: string, newPassword: string) => { success: boolean, message?: string };
 }
 
 const AuthContext = createContext<AuthContextState | undefined>(undefined);
@@ -181,13 +183,46 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       return { success: true };
   };
 
+  const updateUserProfile = (data: { username?: string, customerDetails?: CustomerDetails }): { success: boolean, message?: string } => {
+    if (!currentUser) return { success: false, message: 'No user is logged in.' };
+    
+    if (data.username && users.some(u => u.username.toLowerCase() === data.username?.toLowerCase() && u.id !== currentUser.id)) {
+        return { success: false, message: 'Username already exists.' };
+    }
+
+    const updatedUser = {
+      ...currentUser,
+      username: data.username || currentUser.username,
+      customerDetails: data.customerDetails || currentUser.customerDetails,
+    };
+
+    setUsers(prev => prev.map(u => u.id === currentUser.id ? updatedUser : u));
+    setCurrentUser(updatedUser);
+    return { success: true };
+  };
+
+  const changePassword = (currentPassword: string, newPassword: string): { success: boolean, message?: string } => {
+    if (!currentUser || currentUser.provider !== 'credentials') {
+      return { success: false, message: 'Password can only be changed for standard accounts.' };
+    }
+    if (currentUser.password !== currentPassword) {
+      return { success: false, message: 'Your current password does not match.' };
+    }
+
+    const updatedUser = { ...currentUser, password: newPassword };
+    setUsers(prev => prev.map(u => u.id === currentUser.id ? updatedUser : u));
+    setCurrentUser(updatedUser);
+    return { success: true };
+  };
+
+
   const isLoggedIn = !!currentUser;
   const isAdmin = currentUser?.role === 'admin';
   const adminPassword = (isAdmin && currentUser?.provider === 'credentials') ? currentUser.password : undefined;
 
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, currentUser, isAdmin, users, login, signup, googleLogin, logout, addAdmin, adminPassword, updatePassword, updateAdmin, removeAdmin }}>
+    <AuthContext.Provider value={{ isLoggedIn, currentUser, isAdmin, users, login, signup, googleLogin, logout, addAdmin, adminPassword, updatePassword, updateAdmin, removeAdmin, updateUserProfile, changePassword }}>
       {children}
     </AuthContext.Provider>
   );

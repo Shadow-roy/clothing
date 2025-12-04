@@ -15,7 +15,7 @@ interface NavigationContextState {
 const NavigationContext = createContext<NavigationContextState | undefined>(undefined);
 
 export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [page, setPage] = useState<Page>('store');
+  const [page, setPage] = useState<Page>('login');
   const [params, setParams] = useState<NavigationParams>({});
 
   const navigate = (newPage: Page, newParams: NavigationParams = {}) => {

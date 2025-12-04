@@ -9,13 +9,13 @@ import { ArrowTrendingUpIcon } from './icons/ArrowTrendingUpIcon';
 // Sub-components for AnalyticsDashboard
 
 const StatCard: React.FC<{ title: string; value: string; icon: React.ReactNode }> = ({ title, value, icon }) => (
-    <div className="bg-white p-6 rounded-lg shadow-md flex items-center space-x-4">
-        <div className="bg-blue-100 text-blue-600 p-3 rounded-full">
+    <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md flex items-center space-x-4 border border-gray-200 dark:border-gray-700">
+        <div className="bg-blue-100 dark:bg-blue-900/50 text-blue-600 dark:text-blue-300 p-3 rounded-full">
             {icon}
         </div>
         <div>
-            <p className="text-sm text-gray-500 font-medium">{title}</p>
-            <p className="text-2xl font-bold text-gray-800">{value}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">{title}</p>
+            <p className="text-2xl font-bold text-gray-800 dark:text-gray-100">{value}</p>
         </div>
     </div>
 );
@@ -25,9 +25,9 @@ const SalesChart: React.FC<{ data: { date: string, sales: number }[] }> = ({ dat
     const chartHeight = 200; // in px
 
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md h-full">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Sales in Last 7 Days</h3>
-            <div className="flex justify-around items-end h-52 border-l border-b border-gray-200 pl-4 pb-4">
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md h-full border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Sales in Last 7 Days</h3>
+            <div className="flex justify-around items-end h-52 border-l border-b border-gray-200 dark:border-gray-700 pl-4 pb-4">
                 {data.map(({ date, sales }) => (
                     <div key={date} className="flex flex-col items-center w-1/8 h-full justify-end">
                         <div 
@@ -35,7 +35,7 @@ const SalesChart: React.FC<{ data: { date: string, sales: number }[] }> = ({ dat
                             style={{ height: `${maxValue > 0 ? (sales / maxValue) * chartHeight : 0}px` }}
                             title={`₹${sales.toFixed(2)}`}
                         ></div>
-                        <span className="text-xs text-gray-500 mt-2">{new Date(date).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</span>
+                        <span className="text-xs text-gray-500 dark:text-gray-400 mt-2">{new Date(date).toLocaleDateString('en-US', { day: 'numeric', month: 'short' })}</span>
                     </div>
                 ))}
             </div>
@@ -52,18 +52,18 @@ interface TopProduct {
 }
 
 const TopProducts: React.FC<{ products: TopProduct[] }> = ({ products }) => (
-    <div className="bg-white p-6 rounded-lg shadow-md h-full">
-        <h3 className="text-lg font-semibold text-gray-800 mb-4">Top Selling Products</h3>
+    <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md h-full border border-gray-200 dark:border-gray-700">
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Top Selling Products</h3>
         <ul className="space-y-4">
             {products.map((product, index) => (
                 <li key={product.id} className="flex items-center space-x-4">
-                    <span className="text-lg font-bold text-gray-400 w-6">{index + 1}</span>
+                    <span className="text-lg font-bold text-gray-400 dark:text-gray-500 w-6">{index + 1}</span>
                     <img src={product.imageURL} alt={product.name} className="w-12 h-12 rounded-md object-cover"/>
                     <div className="flex-1">
-                        <p className="font-semibold text-gray-800 truncate">{product.name}</p>
-                        <p className="text-sm text-gray-500">{product.unitsSold} units sold</p>
+                        <p className="font-semibold text-gray-800 dark:text-gray-200 truncate">{product.name}</p>
+                        <p className="text-sm text-gray-500 dark:text-gray-400">{product.unitsSold} units sold</p>
                     </div>
-                    <p className="font-bold text-gray-900">₹{product.revenue.toFixed(2)}</p>
+                    <p className="font-bold text-gray-900 dark:text-gray-100">₹{product.revenue.toFixed(2)}</p>
                 </li>
             ))}
         </ul>
@@ -79,16 +79,16 @@ const TopCategories: React.FC<{ categories: CategorySales[] }> = ({ categories }
     const totalRevenue = categories.reduce((sum, cat) => sum + cat.revenue, 0);
     
     return (
-        <div className="bg-white p-6 rounded-lg shadow-md h-full">
-            <h3 className="text-lg font-semibold text-gray-800 mb-4">Revenue by Category</h3>
+        <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md h-full border border-gray-200 dark:border-gray-700">
+            <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Revenue by Category</h3>
             <ul className="space-y-3">
                 {categories.map(cat => (
                     <li key={cat.name}>
                         <div className="flex justify-between items-center text-sm mb-1">
-                            <span className="font-medium text-gray-700">{cat.name}</span>
-                            <span className="font-semibold text-gray-800">₹{cat.revenue.toFixed(2)}</span>
+                            <span className="font-medium text-gray-700 dark:text-gray-300">{cat.name}</span>
+                            <span className="font-semibold text-gray-800 dark:text-gray-200">₹{cat.revenue.toFixed(2)}</span>
                         </div>
-                        <div className="w-full bg-gray-200 rounded-full h-2.5">
+                        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5">
                             <div className="bg-green-500 h-2.5 rounded-full" style={{ width: `${totalRevenue > 0 ? (cat.revenue / totalRevenue) * 100 : 0}%` }}></div>
                         </div>
                     </li>
@@ -180,8 +180,8 @@ const AnalyticsDashboard: React.FC = () => {
     if (orders.length === 0) {
         return (
             <div>
-              <h1 className="text-2xl font-bold">Analytics Dashboard</h1>
-              <p className="mt-4 text-gray-600">No order data available to display analytics.</p>
+              <h1 className="text-2xl font-bold dark:text-white">Analytics Dashboard</h1>
+              <p className="mt-4 text-gray-600 dark:text-gray-400">No order data available to display analytics.</p>
             </div>
         );
     }

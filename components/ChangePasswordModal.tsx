@@ -28,7 +28,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   onToggleShow,
 }) => (
   <div>
-    <label htmlFor={name} className="block text-sm font-medium text-gray-700">{label}</label>
+    <label htmlFor={name} className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
     <div className="relative mt-1">
       <input
         type={show ? 'text' : 'password'}
@@ -37,7 +37,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
         value={value}
         onChange={onChange}
         onBlur={onBlur}
-        className={`block w-full border rounded-md shadow-sm p-2 pr-10 ${error ? 'border-red-500' : 'border-gray-300'}`}
+        className={`block w-full border rounded-md shadow-sm p-2 pr-10 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white ${error ? 'border-red-500' : ''}`}
         aria-invalid={!!error}
         aria-describedby={error ? `${name}-error` : undefined}
       />
@@ -51,7 +51,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
       </button>
     </div>
     {error && 
-      <div id={`${name}-error`} className="flex items-center text-red-500 text-xs mt-1">
+      <div id={`${name}-error`} className="flex items-center text-red-500 dark:text-red-400 text-xs mt-1">
         <ExclamationCircleIcon className="h-4 w-4 mr-1" />
         <span>{error}</span>
       </div>
@@ -162,13 +162,13 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
   
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-center p-4" aria-modal="true" role="dialog">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-md">
-        <div className="p-4 sm:p-6 border-b">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow-xl w-full max-w-md">
+        <div className="p-4 sm:p-6 border-b dark:border-gray-700">
           <div className="flex justify-between items-center">
-            <h3 className="text-xl font-semibold text-gray-900">Change Password</h3>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">Change Password</h3>
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600"
+              className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
               aria-label="Close modal"
             >
               <XMarkIcon className="w-6 h-6" />
@@ -208,7 +208,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
                 onToggleShow={() => toggleShowPassword('confirm')}
             />
           </div>
-          <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
+          <div className="bg-gray-50 dark:bg-slate-700 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse rounded-b-lg">
             <button
               type="submit"
               className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
@@ -217,7 +217,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({
             </button>
             <button
               type="button"
-              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm"
+              className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 dark:border-gray-600 shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-base font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 sm:mt-0 sm:w-auto sm:text-sm"
               onClick={onClose}
             >
               Cancel

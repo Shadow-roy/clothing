@@ -32,7 +32,7 @@ export interface Order {
   paymentMethod: 'Phone Pay' | 'Cash on Delivery';
 }
 
-export type Page = 'store' | 'detail' | 'checkout' | 'confirmation' | 'admin' | 'login';
+export type Page = 'store' | 'detail' | 'checkout' | 'confirmation' | 'admin' | 'login' | 'profile';
 
 export interface ToastMessage {
   id: number;
@@ -46,4 +46,5 @@ export interface User {
   password?: string;
   role: 'admin' | 'user';
   provider?: 'google' | 'credentials';
+  customerDetails?: CustomerDetails;
 }
