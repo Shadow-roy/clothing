@@ -21,11 +21,11 @@ const Storefront: React.FC = () => {
   return (
     <div className="space-y-12 pb-12">
       {/* Hero Section */}
-      <div className="text-center pt-16 pb-8">
-        <h1 className="text-6xl md:text-7xl font-serif font-bold text-stone-800 dark:text-stone-50 mb-6 tracking-tight drop-shadow-sm">
+      <div className="text-center pt-8 pb-4 md:pt-16 md:pb-8">
+        <h1 className="text-4xl sm:text-5xl md:text-7xl font-serif font-bold text-stone-800 dark:text-stone-50 mb-4 md:mb-6 tracking-tight drop-shadow-sm px-2">
             Discover Your <span className="text-rose-600 dark:text-rose-400 italic">Style</span>
         </h1>
-        <p className="text-xl text-stone-600 dark:text-stone-300 max-w-2xl mx-auto font-light leading-relaxed">
+        <p className="text-base md:text-xl text-stone-600 dark:text-stone-300 max-w-2xl mx-auto font-light leading-relaxed px-4">
             Curated collections for the modern woman. Find pieces that tell your unique story.
         </p>
       </div>
@@ -57,7 +57,7 @@ const Storefront: React.FC = () => {
 
       {/* Grid */}
       {filteredItems.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10 md:gap-x-8 md:gap-y-12">
           {filteredItems.map(item => (
             <ItemCard key={item.id} item={item} />
           ))}

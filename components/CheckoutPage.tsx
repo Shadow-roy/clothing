@@ -149,7 +149,7 @@ const CheckoutPage: React.FC = () => {
   return (
     <form onSubmit={handlePlaceOrder} noValidate className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {/* Customer Details */}
-      <div className="lg:col-span-2 bg-white dark:bg-stone-800 p-8 rounded-lg shadow-md space-y-6 border border-stone-200 dark:border-stone-700">
+      <div className="lg:col-span-2 bg-white dark:bg-stone-800 p-4 sm:p-8 rounded-lg shadow-md space-y-6 border border-stone-200 dark:border-stone-700">
         <h2 className="text-2xl font-bold text-stone-900 dark:text-white">Shipping Information</h2>
         <InputField name="fullName" label="Full Name" icon={<UserIcon className="w-5 h-5 text-stone-400" />} value={customer.fullName} onChange={handleInputChange} error={errors.fullName} />
         <InputField name="phone" label="Phone" type="tel" icon={<PhoneIcon className="w-5 h-5 text-stone-400" />} value={customer.phone} onChange={handleInputChange} error={errors.phone} />
@@ -183,7 +183,7 @@ const CheckoutPage: React.FC = () => {
       </div>
 
       {/* Order Summary */}
-      <div className="bg-white dark:bg-stone-800 p-8 rounded-lg shadow-md lg:col-span-1 h-fit sticky top-28 border border-stone-200 dark:border-stone-700">
+      <div className="bg-white dark:bg-stone-800 p-4 sm:p-8 rounded-lg shadow-md lg:col-span-1 h-fit sticky top-28 border border-stone-200 dark:border-stone-700">
         <h2 className="text-2xl font-bold text-stone-900 dark:text-white mb-6">Order Summary</h2>
         <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
             {cartItems.map(item => (

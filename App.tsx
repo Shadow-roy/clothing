@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { NavigationProvider, useNavigation } from './contexts/NavigationContext';
 import { ItemsProvider } from './contexts/ItemsContext';
@@ -24,6 +24,8 @@ import { ShoppingCartIcon } from './components/icons/ShoppingCartIcon';
 import { HeartOutlineIcon } from './components/icons/HeartOutlineIcon';
 import { SunIcon } from './components/icons/SunIcon';
 import { MoonIcon } from './components/icons/MoonIcon';
+import { Bars3Icon } from './components/icons/Bars3Icon';
+import { XMarkIcon } from './components/icons/XMarkIcon';
 
 function App() {
   return (
@@ -128,9 +130,15 @@ const Header: React.FC = () => {
   const { isLoggedIn, logout, isAdmin } = useAuth();
   const { openWishlist, wishlistItemCount } = useWishlist();
   const { theme, toggleTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const textButtonClass = "text-sm font-medium text-stone-600 hover:text-rose-600 dark:text-stone-300 dark:hover:text-rose-400 transition-colors";
   const iconButtonClass = "relative text-stone-500 hover:text-rose-600 dark:text-stone-400 dark:hover:text-rose-400 transition-colors p-2 rounded-full hover:bg-stone-100/50 dark:hover:bg-stone-700/50";
+
+  const handleMobileNav = (action: () => void) => {
+      action();
+      setIsMobileMenuOpen(false);
+  };
 
   return (
     <header className="bg-white/70 dark:bg-stone-900/70 backdrop-blur-xl border-b border-white/20 dark:border-stone-800 shadow-sm sticky top-0 z-40 transition-colors duration-200">
@@ -139,7 +147,9 @@ const Header: React.FC = () => {
           <div className="flex items-center">
             <h1 onClick={() => navigate('store')} className="text-stone-800 dark:text-white text-2xl font-bold cursor-pointer font-serif tracking-tight">ChicChariot</h1>
           </div>
-          <nav className="flex items-center gap-2 sm:gap-4">
+          
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-2 sm:gap-4">
              <button onClick={openHistory} className={textButtonClass}>Orders</button>
              {isLoggedIn ? (
                 <>
@@ -167,8 +177,49 @@ const Header: React.FC = () => {
               {theme === 'light' ? <MoonIcon className="h-6 w-6" /> : <SunIcon className="h-6 w-6" />}
             </button>
           </nav>
+
+          {/* Mobile Navigation Icons & Menu Toggle */}
+          <div className="flex md:hidden items-center gap-1">
+             <button onClick={openWishlist} className={iconButtonClass}>
+                <HeartOutlineIcon className="h-6 w-6" />
+                {wishlistItemCount > 0 && (
+                    <span className="absolute top-0 right-0 flex items-center justify-center h-3 w-3 bg-rose-500 text-white text-[9px] rounded-full ring-1 ring-white dark:ring-stone-900">{wishlistItemCount}</span>
+                )}
+            </button>
+            <button onClick={openCart} className={iconButtonClass}>
+                <ShoppingCartIcon className="h-6 w-6" />
+                {cartItemCount > 0 && (
+                    <span className="absolute top-0 right-0 flex items-center justify-center h-3 w-3 bg-rose-500 text-white text-[9px] rounded-full ring-1 ring-white dark:ring-stone-900">{cartItemCount}</span>
+                )}
+            </button>
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-stone-600 dark:text-stone-300">
+                {isMobileMenuOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
+            </button>
+          </div>
         </div>
       </div>
+
+      {/* Mobile Menu Dropdown */}
+      {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 w-full bg-white/95 dark:bg-stone-900/95 backdrop-blur-xl border-b border-stone-200 dark:border-stone-800 shadow-xl p-4 flex flex-col gap-4 animate-in slide-in-from-top-2 z-50">
+             <button onClick={() => handleMobileNav(openHistory)} className="text-left py-2 px-4 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 font-medium text-stone-700 dark:text-stone-200">Orders</button>
+             {isLoggedIn ? (
+                <>
+                  <button onClick={() => handleMobileNav(() => navigate('profile'))} className="text-left py-2 px-4 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 font-medium text-stone-700 dark:text-stone-200">Account</button>
+                  {isAdmin && <button onClick={() => handleMobileNav(() => navigate('admin'))} className="text-left py-2 px-4 rounded-lg hover:bg-stone-100 dark:hover:bg-stone-800 font-medium text-stone-700 dark:text-stone-200">Admin Dashboard</button>}
+                  <button onClick={() => handleMobileNav(logout)} className="text-left py-2 px-4 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 font-medium text-red-600 dark:text-red-400">Logout</button>
+                </>
+             ) : (
+                <button onClick={() => handleMobileNav(() => navigate('login'))} className="text-center py-2 px-4 bg-rose-600 text-white rounded-lg font-semibold">Login</button>
+             )}
+             <div className="border-t border-stone-200 dark:border-stone-700 pt-3 flex items-center justify-between px-4">
+                 <span className="text-sm font-medium text-stone-600 dark:text-stone-400">Appearance</span>
+                 <button onClick={toggleTheme} className="p-2 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300">
+                     {theme === 'light' ? <MoonIcon className="h-5 w-5" /> : <SunIcon className="h-5 w-5" />}
+                 </button>
+             </div>
+          </div>
+      )}
     </header>
   );
 }

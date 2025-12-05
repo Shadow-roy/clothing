@@ -100,10 +100,10 @@ const ItemDetail: React.FC<ItemDetailProps> = ({ item }) => {
 
   return (
     <div className="space-y-8">
-    <div className="bg-white/70 dark:bg-stone-900/60 backdrop-blur-xl rounded-3xl shadow-2xl p-6 sm:p-10 max-w-5xl mx-auto border border-white/40 dark:border-stone-700/40">
+    <div className="bg-white/70 dark:bg-stone-900/60 backdrop-blur-xl rounded-3xl shadow-2xl p-4 sm:p-10 max-w-5xl mx-auto border border-white/40 dark:border-stone-700/40">
       <button 
         onClick={() => navigate('store')}
-        className="group flex items-center gap-2 text-sm font-medium text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white mb-8 transition-colors"
+        className="group flex items-center gap-2 text-sm font-medium text-stone-500 hover:text-stone-900 dark:text-stone-400 dark:hover:text-white mb-6 sm:mb-8 transition-colors"
       >
         <div className="p-1 rounded-full bg-white/50 dark:bg-stone-800/50 group-hover:bg-rose-100 dark:group-hover:bg-rose-900/30 transition-colors">
             <ArrowLeftIcon className="w-5 h-5" />
@@ -111,7 +111,7 @@ const ItemDetail: React.FC<ItemDetailProps> = ({ item }) => {
         Back to Store
       </button>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-16">
         <div className="space-y-4">
             <div className="aspect-square w-full overflow-hidden rounded-2xl bg-stone-100 dark:bg-stone-800/50 shadow-inner">
                 <img src={item.imageURL} alt={item.name} className="w-full h-full object-cover" />
@@ -127,11 +127,11 @@ const ItemDetail: React.FC<ItemDetailProps> = ({ item }) => {
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-stone-900 dark:text-stone-50 mb-6 leading-tight drop-shadow-sm">{item.name}</h1>
-          <p className="text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-light">{item.description}</p>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-bold text-stone-900 dark:text-stone-50 mb-4 sm:mb-6 leading-tight drop-shadow-sm">{item.name}</h1>
+          <p className="text-base sm:text-lg text-stone-600 dark:text-stone-300 leading-relaxed font-light">{item.description}</p>
           
-          <div className="mt-10 flex items-end gap-4 pb-8 border-b border-stone-200/50 dark:border-stone-700/50">
-            <p className="text-4xl font-serif font-medium text-stone-900 dark:text-stone-100">₹{item.price.toFixed(2)}</p>
+          <div className="mt-8 sm:mt-10 flex items-end gap-4 pb-8 border-b border-stone-200/50 dark:border-stone-700/50">
+            <p className="text-3xl sm:text-4xl font-serif font-medium text-stone-900 dark:text-stone-100">₹{item.price.toFixed(2)}</p>
             <div className="pb-2">
                 {item.stock > 0 ? (
                     <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100/80 text-green-800 dark:bg-green-900/40 dark:text-green-300 backdrop-blur-sm">
@@ -189,7 +189,7 @@ const ItemDetail: React.FC<ItemDetailProps> = ({ item }) => {
     
     {/* Reviews Section */}
     <div className="max-w-5xl mx-auto space-y-6">
-        <h2 className="text-3xl font-serif font-bold text-stone-900 dark:text-white pl-2">Customer Reviews</h2>
+        <h2 className="text-2xl sm:text-3xl font-serif font-bold text-stone-900 dark:text-white pl-2">Customer Reviews</h2>
         
         {/* Write a Review */}
         <div className="bg-white/70 dark:bg-stone-900/60 backdrop-blur-xl rounded-2xl p-6 border border-white/40 dark:border-stone-700/40 shadow-md">
