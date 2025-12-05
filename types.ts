@@ -30,6 +30,7 @@ export interface Order {
   date: string;
   status: 'Pending' | 'Out for Delivery' | 'Delivered';
   paymentMethod: 'Phone Pay' | 'Cash on Delivery';
+  paymentProof?: string; // URL/Base64 of the uploaded bill/screenshot
 }
 
 export type Page = 'store' | 'detail' | 'checkout' | 'confirmation' | 'admin' | 'login' | 'profile';

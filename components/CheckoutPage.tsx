@@ -13,6 +13,7 @@ import { LockClosedIcon } from './icons/LockClosedIcon';
 import { WalletIcon } from './icons/WalletIcon';
 import { CashIcon } from './icons/CashIcon';
 import { Order, CustomerDetails } from '../types';
+import ImageUpload from './ImageUpload';
 
 const InputField: React.FC<{
   name: keyof Omit<CustomerDetails, 'email'>;
@@ -56,6 +57,7 @@ const CheckoutPage: React.FC = () => {
       return currentUser?.customerDetails || { fullName: '', phone: '', address: '' };
   });
   const [paymentMethod, setPaymentMethod] = useState<Order['paymentMethod']>('Phone Pay');
+  const [paymentProof, setPaymentProof] = useState<string>('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const subtotal = useMemo(() => cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0), [cartItems]);
@@ -94,6 +96,11 @@ const CheckoutPage: React.FC = () => {
       return;
     }
 
+    if (paymentMethod === 'Phone Pay' && !paymentProof) {
+        showToast('Please upload a screenshot of your payment.', 'error');
+        return;
+    }
+
     // Stock check
     for (const cartItem of cartItems) {
         const storeItem = allItems.find(i => i.id === cartItem.id);
@@ -104,7 +111,7 @@ const CheckoutPage: React.FC = () => {
     }
     
     // Process order
-    const newOrder = addOrder(cartItems, customer, paymentMethod);
+    const newOrder = addOrder(cartItems, customer, paymentMethod, paymentProof);
     addNotification(newOrder);
 
     // Update stock
@@ -158,9 +165,19 @@ const CheckoutPage: React.FC = () => {
         </div>
         
         {paymentMethod === 'Phone Pay' && (
-            <div className="text-center bg-stone-100 dark:bg-stone-700 p-6 rounded-lg">
-                <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9980327249@kotak811`} alt="UPI QR Code" className="mx-auto rounded-md"/>
-                <p className="mt-4 text-stone-600 dark:text-stone-400">Scan the QR code with your favorite payment app to complete the purchase.</p>
+            <div className="bg-stone-100 dark:bg-stone-700 p-6 rounded-lg space-y-4">
+                <div className="text-center">
+                    <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9980327249@kotak811`} alt="UPI QR Code" className="mx-auto rounded-md shadow-sm border border-stone-200"/>
+                    <p className="mt-4 text-sm text-stone-600 dark:text-stone-400 font-medium">Scan with your payment app to pay ₹{total.toFixed(2)}</p>
+                </div>
+                
+                <div className="border-t border-stone-300 dark:border-stone-600 pt-4">
+                    <label className="block text-sm font-bold text-stone-700 dark:text-stone-300 mb-2">Upload Payment Screenshot <span className="text-red-500">*</span></label>
+                    <div className="bg-white dark:bg-stone-800 rounded-md border border-stone-300 dark:border-stone-600 p-2">
+                         <ImageUpload value={paymentProof} onChange={setPaymentProof} />
+                    </div>
+                    <p className="text-xs text-stone-500 dark:text-stone-400 mt-2">Upload the screenshot of your transaction as proof.</p>
+                </div>
             </div>
         )}
       </div>

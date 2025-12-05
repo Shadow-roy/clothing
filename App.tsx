@@ -38,20 +38,12 @@ function App() {
       <NavigationProvider>
         <NotificationProvider>
           {/* Main Background with Gradients for Glassmorphism */}
-          <div className="min-h-screen font-sans transition-colors duration-200 relative bg-stone-50 dark:bg-black text-stone-800 dark:text-stone-100 selection:bg-fuchsia-500 selection:text-white">
+          <div className="min-h-screen font-sans transition-colors duration-200 relative bg-stone-50 dark:bg-stone-950">
               {/* Background Orbs */}
-              <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
-                  {/* Light Mode Gradients */}
-                  <div className="dark:hidden absolute top-0 left-1/4 w-96 h-96 bg-rose-200/30 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob"></div>
-                  <div className="dark:hidden absolute top-0 right-1/4 w-96 h-96 bg-stone-200/40 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-                  
-                  {/* Dark Mode Gradients (Requested Theme) */}
-                  {/* Purple/Pink Glow (Bottom Left) */}
-                  <div className="hidden dark:block absolute -bottom-[10%] -left-[10%] w-[70vw] h-[70vw] bg-fuchsia-700/25 rounded-full mix-blend-screen filter blur-[120px] opacity-100 animate-pulse"></div>
-                  {/* Cyan/Blue Glow (Bottom Right) */}
-                  <div className="hidden dark:block absolute -bottom-[10%] -right-[10%] w-[70vw] h-[70vw] bg-cyan-600/25 rounded-full mix-blend-screen filter blur-[120px] opacity-100 animate-pulse animation-delay-4000"></div>
-                  {/* Subtle Top Glow to bridge them */}
-                  <div className="hidden dark:block absolute top-[-20%] left-[20%] w-[60vw] h-[40vw] bg-purple-900/10 rounded-full filter blur-[150px]"></div>
+              <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+                  <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-200/30 dark:bg-rose-900/10 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob"></div>
+                  <div className="absolute top-0 right-1/4 w-96 h-96 bg-stone-200/40 dark:bg-stone-800/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
+                  <div className="absolute -bottom-8 left-1/3 w-96 h-96 bg-rose-100/30 dark:bg-rose-900/10 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
               </div>
 
               {/* Content Wrapper */}
@@ -138,10 +130,10 @@ const Header: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   
   const textButtonClass = "text-sm font-medium text-stone-600 hover:text-rose-600 dark:text-stone-300 dark:hover:text-rose-400 transition-colors";
-  const iconButtonClass = "relative text-stone-500 hover:text-rose-600 dark:text-stone-400 dark:hover:text-rose-400 transition-colors p-2 rounded-full hover:bg-stone-100/50 dark:hover:bg-white/10";
+  const iconButtonClass = "relative text-stone-500 hover:text-rose-600 dark:text-stone-400 dark:hover:text-rose-400 transition-colors p-2 rounded-full hover:bg-stone-100/50 dark:hover:bg-stone-700/50";
 
   return (
-    <header className="bg-white/70 dark:bg-black/30 backdrop-blur-xl border-b border-white/20 dark:border-white/10 shadow-sm sticky top-0 z-40 transition-colors duration-200">
+    <header className="bg-white/70 dark:bg-stone-900/70 backdrop-blur-xl border-b border-white/20 dark:border-stone-800 shadow-sm sticky top-0 z-40 transition-colors duration-200">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
@@ -156,19 +148,19 @@ const Header: React.FC = () => {
                   <button onClick={logout} className={textButtonClass}>Logout</button>
                 </>
              ) : (
-                <button onClick={() => navigate('login')} className="bg-rose-600/90 hover:bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-rose-200/20 dark:shadow-none backdrop-blur-sm">Login</button>
+                <button onClick={() => navigate('login')} className="bg-rose-600/90 hover:bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-rose-200 dark:shadow-none backdrop-blur-sm">Login</button>
              )}
-             <div className="h-6 w-px bg-stone-300 dark:bg-white/10 hidden sm:block"></div>
+             <div className="h-6 w-px bg-stone-300 dark:bg-stone-700 hidden sm:block"></div>
             <button onClick={openWishlist} className={iconButtonClass}>
                 <HeartOutlineIcon className="h-6 w-6" />
                 {wishlistItemCount > 0 && (
-                    <span className="absolute top-0 right-0 flex items-center justify-center h-4 w-4 bg-rose-500 text-white text-[10px] rounded-full ring-2 ring-white dark:ring-black">{wishlistItemCount}</span>
+                    <span className="absolute top-0 right-0 flex items-center justify-center h-4 w-4 bg-rose-500 text-white text-[10px] rounded-full ring-2 ring-white dark:ring-stone-900">{wishlistItemCount}</span>
                 )}
             </button>
             <button onClick={openCart} className={iconButtonClass}>
                 <ShoppingCartIcon className="h-6 w-6" />
                 {cartItemCount > 0 && (
-                    <span className="absolute top-0 right-0 flex items-center justify-center h-4 w-4 bg-rose-500 text-white text-[10px] rounded-full ring-2 ring-white dark:ring-black">{cartItemCount}</span>
+                    <span className="absolute top-0 right-0 flex items-center justify-center h-4 w-4 bg-rose-500 text-white text-[10px] rounded-full ring-2 ring-white dark:ring-stone-900">{cartItemCount}</span>
                 )}
             </button>
              <button onClick={toggleTheme} className={iconButtonClass} aria-label="Toggle theme">

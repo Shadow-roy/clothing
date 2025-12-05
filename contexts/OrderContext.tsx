@@ -5,7 +5,7 @@ import { Order, CartItem, CustomerDetails } from '../types';
 interface OrderContextState {
   orders: Order[];
   isHistoryOpen: boolean;
-  addOrder: (items: CartItem[], customer: CustomerDetails, paymentMethod: Order['paymentMethod']) => Order;
+  addOrder: (items: CartItem[], customer: CustomerDetails, paymentMethod: Order['paymentMethod'], paymentProof?: string) => Order;
   updateOrderStatus: (id: string, status: Order['status']) => void;
   openHistory: () => void;
   closeHistory: () => void;
@@ -28,7 +28,7 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     localStorage.setItem('glossaryOrders', JSON.stringify(orders));
   }, [orders]);
 
-  const addOrder = (items: CartItem[], customer: CustomerDetails, paymentMethod: Order['paymentMethod']): Order => {
+  const addOrder = (items: CartItem[], customer: CustomerDetails, paymentMethod: Order['paymentMethod'], paymentProof?: string): Order => {
     const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const shipping = 40; // Assuming a fixed shipping cost
     const total = subtotal + shipping;
@@ -43,6 +43,7 @@ export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) =
       date: new Date().toISOString(),
       status: 'Pending',
       paymentMethod,
+      paymentProof,
     };
     setOrders(prev => [newOrder, ...prev]);
     return newOrder;
