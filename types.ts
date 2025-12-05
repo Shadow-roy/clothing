@@ -48,3 +48,13 @@ export interface User {
   provider?: 'google' | 'credentials';
   customerDetails?: CustomerDetails;
 }
+
+export interface Review {
+    id: string;
+    itemId: string;
+    userId: string;
+    userName: string;
+    rating: number; // 1 to 5
+    comment: string;
+    date: string;
+}

@@ -117,7 +117,7 @@ const AdminDashboard: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 dark:bg-slate-900">
+        <div className="min-h-screen bg-stone-100 dark:bg-stone-900 transition-colors duration-200">
             {isSidebarOpen && (
                 <div 
                     className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden" 
@@ -126,32 +126,32 @@ const AdminDashboard: React.FC = () => {
                 ></div>
             )}
 
-            <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-slate-800 text-gray-800 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:translate-x-0 md:flex md:flex-col border-r border-gray-200 dark:border-gray-700`}>
-                <div className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 h-16">
-                    <span className="text-2xl font-bold text-slate-800 dark:text-white font-serif">Admin Panel</span>
-                    <button className="md:hidden text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-white" onClick={() => setIsSidebarOpen(false)} aria-label="Close sidebar">
+            <aside className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-stone-800 text-stone-800 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 ease-in-out md:translate-x-0 md:flex md:flex-col border-r border-stone-200 dark:border-stone-700`}>
+                <div className="flex items-center justify-between p-4 border-b border-stone-200 dark:border-stone-700 h-16">
+                    <span className="text-2xl font-bold text-stone-800 dark:text-white font-serif">Admin Panel</span>
+                    <button className="md:hidden text-stone-500 hover:text-stone-800 dark:text-stone-400 dark:hover:text-white" onClick={() => setIsSidebarOpen(false)} aria-label="Close sidebar">
                         <XMarkIcon className="w-6 h-6" />
                     </button>
                 </div>
                 <nav className="flex-1 p-2 space-y-2">
                     {navItems.map(item => (
-                        <button key={item.id} onClick={() => handleNavClick(item.id)} className={`w-full flex items-center gap-3 px-4 py-2 rounded-md text-left transition-colors font-medium relative ${activePage === item.id ? 'bg-indigo-50 text-indigo-700 dark:bg-indigo-900/50 dark:text-indigo-300' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700'}`}>
-                           {activePage === item.id && <span className="absolute left-0 top-2 bottom-2 w-1 bg-indigo-600 rounded-r-full"></span>}
+                        <button key={item.id} onClick={() => handleNavClick(item.id)} className={`w-full flex items-center gap-3 px-4 py-2 rounded-md text-left transition-colors font-medium relative ${activePage === item.id ? 'bg-rose-50 text-rose-700 dark:bg-rose-900/50 dark:text-rose-300' : 'text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700'}`}>
+                           {activePage === item.id && <span className="absolute left-0 top-2 bottom-2 w-1 bg-rose-600 rounded-r-full"></span>}
                            <item.icon className="w-5 h-5" /> {item.label}
                         </button>
                     ))}
                 </nav>
-                <div className="p-2 border-t border-gray-200 dark:border-gray-700">
+                <div className="p-2 border-t border-stone-200 dark:border-stone-700">
                      <div className="p-2 mb-2">
-                        <div className="flex items-center gap-3 p-2 rounded-md bg-gray-100 dark:bg-slate-700 border border-gray-200 dark:border-gray-600">
-                            <UserIcon className="w-8 h-8 p-1.5 bg-indigo-200 text-indigo-700 rounded-full flex-shrink-0" />
+                        <div className="flex items-center gap-3 p-2 rounded-md bg-stone-100 dark:bg-stone-700 border border-stone-200 dark:border-stone-600">
+                            <UserIcon className="w-8 h-8 p-1.5 bg-rose-200 text-rose-700 rounded-full flex-shrink-0" />
                             <div>
-                                <p className="text-sm font-semibold text-gray-800 dark:text-gray-100 truncate">{currentUser?.username}</p>
-                                <p className="text-xs text-gray-500 dark:text-gray-400">Administrator</p>
+                                <p className="text-sm font-semibold text-stone-800 dark:text-stone-100 truncate">{currentUser?.username}</p>
+                                <p className="text-xs text-stone-500 dark:text-stone-400">Administrator</p>
                             </div>
                         </div>
                     </div>
-                     <button onClick={() => { setPasswordModalOpen(true); setIsSidebarOpen(false); }} className="w-full flex items-center gap-3 px-4 py-2 rounded-md text-left transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 mb-2">
+                     <button onClick={() => { setPasswordModalOpen(true); setIsSidebarOpen(false); }} className="w-full flex items-center gap-3 px-4 py-2 rounded-md text-left transition-colors text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700 mb-2">
                         <KeyIcon className="w-5 h-5" /> Change Password
                     </button>
                     <button onClick={logout} className="w-full bg-red-600 text-white font-semibold py-2 rounded-md hover:bg-red-700">
@@ -161,24 +161,24 @@ const AdminDashboard: React.FC = () => {
             </aside>
 
             <div className="md:ml-64 flex flex-col min-h-screen">
-                 <header className="md:hidden bg-white dark:bg-slate-800 shadow-sm sticky top-0 z-30 flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 h-16">
-                    <button onClick={() => setIsSidebarOpen(true)} className="text-gray-600 dark:text-gray-300" aria-label="Open sidebar">
+                 <header className="md:hidden bg-white dark:bg-stone-800 shadow-sm sticky top-0 z-30 flex items-center justify-between p-4 border-b border-stone-200 dark:border-stone-700 h-16">
+                    <button onClick={() => setIsSidebarOpen(true)} className="text-stone-600 dark:text-stone-300" aria-label="Open sidebar">
                         <Bars3Icon className="h-6 w-6" />
                     </button>
-                    <h1 className="text-lg font-bold text-slate-800 dark:text-white capitalize font-serif">{activePage.replace('-', ' ')}</h1>
+                    <h1 className="text-lg font-bold text-stone-800 dark:text-white capitalize font-serif">{activePage.replace('-', ' ')}</h1>
                     <div className="w-6 h-6"></div>
                 </header>
 
                 <main className="flex-1 p-6 lg:p-10">
                     <div className="flex justify-between items-center mb-6">
-                        <h1 className="hidden md:block text-3xl font-bold text-slate-800 dark:text-slate-100 capitalize font-serif">{activePage.replace('-', ' ')}</h1>
+                        <h1 className="hidden md:block text-3xl font-bold text-stone-800 dark:text-stone-100 capitalize font-serif">{activePage.replace('-', ' ')}</h1>
                         {activePage === 'items' && (
-                            <button onClick={handleAddItem} className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-indigo-700 ml-auto shadow-sm">
+                            <button onClick={handleAddItem} className="flex items-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-rose-700 ml-auto shadow-sm">
                                 <PlusIcon className="w-5 h-5" /> Add Item
                             </button>
                         )}
                     </div>
-                    <div className="bg-white dark:bg-slate-800 p-6 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
+                    <div className="bg-white dark:bg-stone-800 p-6 rounded-lg shadow-md border border-stone-200 dark:border-stone-700">
                         {renderContent()}
                     </div>
                 </main>
@@ -263,17 +263,17 @@ const AdminManagement: React.FC<{
 
     return (
         <div className="space-y-6">
-            <form onSubmit={handleAddAdmin} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end p-4 border rounded-lg bg-gray-50 dark:bg-slate-700/50 border-gray-200 dark:border-gray-700">
+            <form onSubmit={handleAddAdmin} className="grid grid-cols-1 md:grid-cols-3 gap-4 items-end p-4 border rounded-lg bg-stone-50 dark:bg-stone-700/50 border-stone-200 dark:border-stone-700">
                 <div className="md:col-span-1">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">New Admin Username</label>
-                    <input type="text" value={addUsername} onChange={e => setAddUsername(e.target.value)} className="mt-1 block w-full border rounded-md shadow-sm p-2 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
+                    <label className="block text-sm font-medium text-stone-700 dark:text-stone-300">New Admin Username</label>
+                    <input type="text" value={addUsername} onChange={e => setAddUsername(e.target.value)} className="mt-1 block w-full border rounded-md shadow-sm p-2 bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white" />
                 </div>
                 <div className="md:col-span-1">
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
-                    <input type="password" value={addPassword} onChange={e => setAddPassword(e.target.value)} className="mt-1 block w-full border rounded-md shadow-sm p-2 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
+                    <label className="block text-sm font-medium text-stone-700 dark:text-stone-300">Password</label>
+                    <input type="password" value={addPassword} onChange={e => setAddPassword(e.target.value)} className="mt-1 block w-full border rounded-md shadow-sm p-2 bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white" />
                 </div>
                 <div className="md:col-span-1">
-                    <button type="submit" className="w-full flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-blue-700">
+                    <button type="submit" className="w-full flex items-center justify-center gap-2 bg-rose-600 text-white px-4 py-2 rounded-md font-semibold hover:bg-rose-700">
                         <PlusIcon className="w-5 h-5" /> Add Admin
                     </button>
                 </div>
@@ -281,28 +281,28 @@ const AdminManagement: React.FC<{
             </form>
 
             <div>
-                <h3 className="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">Current Admins</h3>
-                <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                <h3 className="text-lg font-semibold mb-2 text-stone-800 dark:text-stone-200">Current Admins</h3>
+                <ul className="divide-y divide-stone-200 dark:divide-stone-700">
                     {admins.map(admin => (
                         <li key={admin.id} className="py-3 px-2">
                             {editingId === admin.id ? (
                                 <div className="space-y-3">
                                     <div className="flex flex-col sm:flex-row gap-2 items-start">
-                                        <input type="text" value={editUsername} onChange={e => setEditUsername(e.target.value)} className="border p-1 rounded-md w-full sm:w-auto flex-1 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" placeholder="Username" />
-                                        <input type="password" value={editPassword} onChange={e => setEditPassword(e.target.value)} className="border p-1 rounded-md w-full sm:w-auto flex-1 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" placeholder="New Password (optional)" />
+                                        <input type="text" value={editUsername} onChange={e => setEditUsername(e.target.value)} className="border p-1 rounded-md w-full sm:w-auto flex-1 bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white" placeholder="Username" />
+                                        <input type="password" value={editPassword} onChange={e => setEditPassword(e.target.value)} className="border p-1 rounded-md w-full sm:w-auto flex-1 bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white" placeholder="New Password (optional)" />
                                         <div className="flex gap-2">
                                             <button onClick={() => handleSaveEdit(admin.id)} className="text-green-600 p-1 rounded hover:bg-green-100 dark:hover:bg-green-900/50"><CheckIcon className="w-5 h-5"/></button>
-                                            <button onClick={handleCancelEdit} className="text-gray-500 dark:text-gray-400 p-1 rounded hover:bg-gray-100 dark:hover:bg-gray-600"><XMarkIcon className="w-5 h-5"/></button>
+                                            <button onClick={handleCancelEdit} className="text-stone-500 dark:text-stone-400 p-1 rounded hover:bg-stone-100 dark:hover:bg-stone-600"><XMarkIcon className="w-5 h-5"/></button>
                                         </div>
                                     </div>
                                     {editError && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{editError}</p>}
                                 </div>
                             ) : (
                                 <div className="flex justify-between items-center">
-                                    <span className="text-gray-700 dark:text-gray-300 font-medium">{admin.username} {admin.id === currentUser?.id && '(You)'}</span>
+                                    <span className="text-stone-700 dark:text-stone-300 font-medium">{admin.username} {admin.id === currentUser?.id && '(You)'}</span>
                                     <div className="flex items-center gap-2">
-                                        <button onClick={() => handleEditClick(admin)} className="text-indigo-600 hover:text-indigo-800 p-1 rounded hover:bg-indigo-100 dark:hover:bg-indigo-900/50"><PencilIcon className="w-5 h-5"/></button>
-                                        <button onClick={() => setDeletingAdmin(admin)} disabled={admin.id === currentUser?.id} className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/50 disabled:text-gray-400 disabled:hover:bg-transparent disabled:cursor-not-allowed"><TrashIcon className="w-5 h-5"/></button>
+                                        <button onClick={() => handleEditClick(admin)} className="text-rose-600 hover:text-rose-800 p-1 rounded hover:bg-rose-100 dark:hover:bg-rose-900/50"><PencilIcon className="w-5 h-5"/></button>
+                                        <button onClick={() => setDeletingAdmin(admin)} disabled={admin.id === currentUser?.id} className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-100 dark:hover:bg-red-900/50 disabled:text-stone-400 disabled:hover:bg-transparent disabled:cursor-not-allowed"><TrashIcon className="w-5 h-5"/></button>
                                     </div>
                                 </div>
                             )}
@@ -317,25 +317,25 @@ const AdminManagement: React.FC<{
 
 const ItemManagement: React.FC<{ items: GlossaryItem[], onEdit: (item: GlossaryItem) => void, onDelete: (id: string) => void }> = ({ items, onEdit, onDelete }) => (
     <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-            <thead className="bg-gray-50 dark:bg-slate-700">
+        <table className="min-w-full divide-y divide-stone-200 dark:divide-stone-700">
+            <thead className="bg-stone-50 dark:bg-stone-700">
                 <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Name</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Category</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Price</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Stock</th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Name</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Category</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Price</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Stock</th>
+                    <th className="px-6 py-3 text-right text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Actions</th>
                 </tr>
             </thead>
-            <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-gray-700">
+            <tbody className="bg-white dark:bg-stone-800 divide-y divide-stone-200 dark:divide-stone-700">
                 {items.map((item, index) => (
-                    <tr key={item.id} className={index % 2 === 0 ? undefined : 'bg-gray-50 dark:bg-slate-800/50'}>
-                        <td className="px-6 py-4 whitespace-nowrap"><div className="text-sm font-medium text-gray-900 dark:text-gray-100">{item.name}</div></td>
-                        <td className="px-6 py-4 whitespace-nowrap"><span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-indigo-100 text-indigo-800 dark:bg-indigo-900/50 dark:text-indigo-300">{item.category}</span></td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">₹{item.price.toFixed(2)}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{item.stock}</td>
+                    <tr key={item.id} className={index % 2 === 0 ? undefined : 'bg-stone-50 dark:bg-stone-800/50'}>
+                        <td className="px-6 py-4 whitespace-nowrap"><div className="text-sm font-medium text-stone-900 dark:text-stone-100">{item.name}</div></td>
+                        <td className="px-6 py-4 whitespace-nowrap"><span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-rose-100 text-rose-800 dark:bg-rose-900/50 dark:text-rose-300">{item.category}</span></td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-700 dark:text-stone-300">₹{item.price.toFixed(2)}</td>
+                        <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-700 dark:text-stone-300">{item.stock}</td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <button onClick={() => onEdit(item)} className="text-indigo-600 hover:text-indigo-900 dark:hover:text-indigo-400 mr-4"><PencilIcon className="w-5 h-5"/></button>
+                            <button onClick={() => onEdit(item)} className="text-rose-600 hover:text-rose-900 dark:hover:text-rose-400 mr-4"><PencilIcon className="w-5 h-5"/></button>
                             <button onClick={() => onDelete(item.id)} className="text-red-600 hover:text-red-900 dark:hover:text-red-400"><TrashIcon className="w-5 h-5"/></button>
                         </td>
                     </tr>
@@ -377,30 +377,30 @@ const CategoryManagement: React.FC<{
     return (
         <div>
             <div className="flex gap-2 mb-4">
-                <input type="text" value={newCategory} onChange={e => setNewCategory(e.target.value)} placeholder="New category name" className="border p-2 rounded-md flex-1 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-                <button onClick={handleAddCategory} className="bg-blue-600 text-white px-4 py-2 rounded-md">Add</button>
+                <input type="text" value={newCategory} onChange={e => setNewCategory(e.target.value)} placeholder="New category name" className="border p-2 rounded-md flex-1 bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white" />
+                <button onClick={handleAddCategory} className="bg-rose-600 text-white px-4 py-2 rounded-md">Add</button>
             </div>
             <ul className="space-y-2">
                 {categories.map(cat => (
-                    <li key={cat} className="flex justify-between items-center p-2 border rounded-md border-gray-200 dark:border-gray-700">
+                    <li key={cat} className="flex justify-between items-center p-2 border rounded-md border-stone-200 dark:border-stone-700">
                        {editingCategory?.oldName === cat ? (
                             <input 
                                 type="text"
                                 value={editingCategory.newName}
                                 onChange={e => setEditingCategory({ ...editingCategory, newName: e.target.value })}
-                                className="border p-1 rounded-md flex-1 bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"
+                                className="border p-1 rounded-md flex-1 bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white"
                             />
                        ) : (
-                           <span className="text-gray-800 dark:text-gray-200">{cat}</span>
+                           <span className="text-stone-800 dark:text-stone-200">{cat}</span>
                        )}
                         <div className="flex gap-2">
                             {editingCategory?.oldName === cat ? (
                                 <>
                                     <button onClick={handleUpdateCategory} className="text-green-600"><CheckIcon className="w-5 h-5"/></button>
-                                    <button onClick={() => setEditingCategory(null)} className="text-gray-500 dark:text-gray-400"><XMarkIcon className="w-5 h-5"/></button>
+                                    <button onClick={() => setEditingCategory(null)} className="text-stone-500 dark:text-stone-400"><XMarkIcon className="w-5 h-5"/></button>
                                 </>
                             ) : (
-                                <button onClick={() => setEditingCategory({ oldName: cat, newName: cat })} className="text-indigo-600"><PencilIcon className="w-5 h-5"/></button>
+                                <button onClick={() => setEditingCategory({ oldName: cat, newName: cat })} className="text-rose-600"><PencilIcon className="w-5 h-5"/></button>
                             )}
                             <button onClick={() => deleteCategory(cat)} className="text-red-600"><TrashIcon className="w-5 h-5"/></button>
                         </div>
@@ -418,30 +418,30 @@ const OrderManagement: React.FC<{ orders: Order[], onStatusChange: (id: string, 
     return (
         <div>
             <div className="relative mb-4">
-                <input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Search by Order ID or Name" className="w-full pl-10 pr-4 py-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400 dark:text-gray-500" />
+                <input type="text" value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Search by Order ID or Name" className="w-full pl-10 pr-4 py-2 border rounded-md bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white" />
+                <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-stone-400 dark:text-stone-500" />
             </div>
             <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                <thead className="bg-gray-50 dark:bg-slate-700">
+            <table className="min-w-full divide-y divide-stone-200 dark:divide-stone-700">
+                <thead className="bg-stone-50 dark:bg-stone-700">
                     <tr>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Order ID</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Customer</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Date</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Total</th>
-                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Status</th>
-                        <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">Actions</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Order ID</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Customer</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Date</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Total</th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Status</th>
+                        <th className="px-6 py-3 text-right text-xs font-medium text-stone-500 dark:text-stone-300 uppercase tracking-wider">Actions</th>
                     </tr>
                 </thead>
-                <tbody className="bg-white dark:bg-slate-800 divide-y divide-gray-200 dark:divide-gray-700">
+                <tbody className="bg-white dark:bg-stone-800 divide-y divide-stone-200 dark:divide-stone-700">
                     {filteredOrders.map((order, index) => (
-                        <tr key={order.id} className={index % 2 === 0 ? undefined : 'bg-gray-50 dark:bg-slate-800/50'}>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-100">{order.id}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200">{order.customer.fullName}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{new Date(order.date).toLocaleDateString()}</td>
-                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">₹{order.total.toFixed(2)}</td>
+                        <tr key={order.id} className={index % 2 === 0 ? undefined : 'bg-stone-50 dark:bg-stone-800/50'}>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-stone-900 dark:text-stone-100">{order.id}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-800 dark:text-stone-200">{order.customer.fullName}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-500 dark:text-stone-400">{new Date(order.date).toLocaleDateString()}</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-stone-700 dark:text-stone-300">₹{order.total.toFixed(2)}</td>
                             <td className="px-6 py-4 whitespace-nowrap">
-                                <select value={order.status} onChange={e => onStatusChange(order.id, e.target.value as Order['status'])} className="p-1 border rounded-md text-sm bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white">
+                                <select value={order.status} onChange={e => onStatusChange(order.id, e.target.value as Order['status'])} className="p-1 border rounded-md text-sm bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white">
                                     <option value="Pending">Pending</option>
                                     <option value="Out for Delivery">Out for Delivery</option>
                                     <option value="Delivered">Delivered</option>

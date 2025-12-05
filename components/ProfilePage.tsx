@@ -97,51 +97,51 @@ const ProfilePage: React.FC = () => {
 
     return (
         <div className="max-w-4xl mx-auto space-y-8">
-            <h1 className="text-3xl font-bold text-slate-800 dark:text-slate-100">My Account</h1>
+            <h1 className="text-3xl font-bold text-stone-800 dark:text-stone-100">My Account</h1>
 
             {/* Account & Shipping Details */}
-            <form onSubmit={handleSaveDetails} className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 space-y-6">
-                <h2 className="text-xl font-bold text-gray-900 dark:text-white border-b dark:border-gray-700 pb-4">Profile Information</h2>
+            <form onSubmit={handleSaveDetails} className="bg-white dark:bg-stone-800 p-8 rounded-lg shadow-md border border-stone-200 dark:border-stone-700 space-y-6">
+                <h2 className="text-xl font-bold text-stone-900 dark:text-white border-b dark:border-stone-700 pb-4">Profile Information</h2>
                 
                 {/* Account Details */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                      <div>
-                        <label htmlFor="username" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Username</label>
+                        <label htmlFor="username" className="block text-sm font-medium text-stone-700 dark:text-stone-300">Username</label>
                         <div className="relative mt-1">
-                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><UserIcon className="w-5 h-5 text-gray-400"/></div>
-                            <input type="text" id="username" name="username" value={details.username} onChange={handleDetailsChange} disabled={isGoogleUser} className="w-full pl-10 pr-3 py-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white disabled:bg-gray-100 dark:disabled:bg-gray-800 dark:disabled:text-gray-400" />
+                            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><UserIcon className="w-5 h-5 text-stone-400"/></div>
+                            <input type="text" id="username" name="username" value={details.username} onChange={handleDetailsChange} disabled={isGoogleUser} className="w-full pl-10 pr-3 py-2 border rounded-md bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white disabled:bg-stone-100 dark:disabled:bg-stone-800 dark:disabled:text-stone-400" />
                         </div>
-                         {isGoogleUser && <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Username cannot be changed for Google accounts.</p>}
+                         {isGoogleUser && <p className="text-xs text-stone-500 dark:text-stone-400 mt-1">Username cannot be changed for Google accounts.</p>}
                     </div>
                 </div>
 
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200 pt-4">Saved Shipping Details</h3>
+                <h3 className="text-lg font-semibold text-stone-800 dark:text-stone-200 pt-4">Saved Shipping Details</h3>
                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
+                        <label htmlFor="fullName" className="block text-sm font-medium text-stone-700 dark:text-stone-300">Full Name</label>
                         <div className="relative mt-1">
-                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><UserIcon className="w-5 h-5 text-gray-400"/></div>
-                             <input type="text" id="fullName" name="fullName" value={details.fullName} onChange={handleDetailsChange} className="w-full pl-10 pr-3 py-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"/>
+                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><UserIcon className="w-5 h-5 text-stone-400"/></div>
+                             <input type="text" id="fullName" name="fullName" value={details.fullName} onChange={handleDetailsChange} className="w-full pl-10 pr-3 py-2 border rounded-md bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white"/>
                         </div>
                     </div>
                     <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Phone</label>
+                        <label htmlFor="phone" className="block text-sm font-medium text-stone-700 dark:text-stone-300">Phone</label>
                          <div className="relative mt-1">
-                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><PhoneIcon className="w-5 h-5 text-gray-400"/></div>
-                             <input type="tel" id="phone" name="phone" value={details.phone} onChange={handleDetailsChange} className="w-full pl-10 pr-3 py-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"/>
+                             <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><PhoneIcon className="w-5 h-5 text-stone-400"/></div>
+                             <input type="tel" id="phone" name="phone" value={details.phone} onChange={handleDetailsChange} className="w-full pl-10 pr-3 py-2 border rounded-md bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white"/>
                         </div>
                     </div>
                  </div>
                  <div>
-                    <label htmlFor="address" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Address</label>
+                    <label htmlFor="address" className="block text-sm font-medium text-stone-700 dark:text-stone-300">Address</label>
                     <div className="relative mt-1">
-                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><MapPinIcon className="w-5 h-5 text-gray-400"/></div>
-                         <input type="text" id="address" name="address" value={details.address} onChange={handleDetailsChange} className="w-full pl-10 pr-3 py-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white"/>
+                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"><MapPinIcon className="w-5 h-5 text-stone-400"/></div>
+                         <input type="text" id="address" name="address" value={details.address} onChange={handleDetailsChange} className="w-full pl-10 pr-3 py-2 border rounded-md bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white"/>
                     </div>
                 </div>
 
                 <div className="text-right pt-4">
-                    <button type="submit" className="bg-indigo-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-indigo-700 transition-colors">
+                    <button type="submit" className="bg-rose-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-rose-700 transition-colors">
                         Save Changes
                     </button>
                 </div>
@@ -149,33 +149,33 @@ const ProfilePage: React.FC = () => {
 
             {/* Change Password */}
              {!isGoogleUser && (
-                <form onSubmit={handleSavePassword} className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-md border border-gray-200 dark:border-gray-700 space-y-6">
-                    <h2 className="text-xl font-bold text-gray-900 dark:text-white border-b dark:border-gray-700 pb-4">Change Password</h2>
+                <form onSubmit={handleSavePassword} className="bg-white dark:bg-stone-800 p-8 rounded-lg shadow-md border border-stone-200 dark:border-stone-700 space-y-6">
+                    <h2 className="text-xl font-bold text-stone-900 dark:text-white border-b dark:border-stone-700 pb-4">Change Password</h2>
                     <div className="space-y-4">
                         <div>
-                          <label htmlFor="currentPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Current Password</label>
+                          <label htmlFor="currentPassword" className="block text-sm font-medium text-stone-700 dark:text-stone-300">Current Password</label>
                            <div className="relative mt-1">
-                                <input type={showPasswords.current ? 'text' : 'password'} id="currentPassword" name="currentPassword" value={passwordData.currentPassword} onChange={handlePasswordChange} className="w-full pr-10 py-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-                                <button type="button" onClick={() => toggleShowPassword('current')} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">{showPasswords.current ? <EyeSlashIcon className="h-5 w-5"/> : <EyeIcon className="h-5 w-5"/>}</button>
+                                <input type={showPasswords.current ? 'text' : 'password'} id="currentPassword" name="currentPassword" value={passwordData.currentPassword} onChange={handlePasswordChange} className="w-full pr-10 py-2 border rounded-md bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white" />
+                                <button type="button" onClick={() => toggleShowPassword('current')} className="absolute inset-y-0 right-0 pr-3 flex items-center text-stone-500">{showPasswords.current ? <EyeSlashIcon className="h-5 w-5"/> : <EyeIcon className="h-5 w-5"/>}</button>
                            </div>
                         </div>
                          <div>
-                          <label htmlFor="newPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300">New Password</label>
+                          <label htmlFor="newPassword" className="block text-sm font-medium text-stone-700 dark:text-stone-300">New Password</label>
                            <div className="relative mt-1">
-                                <input type={showPasswords.new ? 'text' : 'password'} id="newPassword" name="newPassword" value={passwordData.newPassword} onChange={handlePasswordChange} className="w-full pr-10 py-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-                                <button type="button" onClick={() => toggleShowPassword('new')} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">{showPasswords.new ? <EyeSlashIcon className="h-5 w-5"/> : <EyeIcon className="h-5 w-5"/>}</button>
+                                <input type={showPasswords.new ? 'text' : 'password'} id="newPassword" name="newPassword" value={passwordData.newPassword} onChange={handlePasswordChange} className="w-full pr-10 py-2 border rounded-md bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white" />
+                                <button type="button" onClick={() => toggleShowPassword('new')} className="absolute inset-y-0 right-0 pr-3 flex items-center text-stone-500">{showPasswords.new ? <EyeSlashIcon className="h-5 w-5"/> : <EyeIcon className="h-5 w-5"/>}</button>
                            </div>
                         </div>
                         <div>
-                          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm New Password</label>
+                          <label htmlFor="confirmPassword" className="block text-sm font-medium text-stone-700 dark:text-stone-300">Confirm New Password</label>
                            <div className="relative mt-1">
-                                <input type={showPasswords.confirm ? 'text' : 'password'} id="confirmPassword" name="confirmPassword" value={passwordData.confirmPassword} onChange={handlePasswordChange} className="w-full pr-10 py-2 border rounded-md bg-white dark:bg-gray-700 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white" />
-                                <button type="button" onClick={() => toggleShowPassword('confirm')} className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-500">{showPasswords.confirm ? <EyeSlashIcon className="h-5 w-5"/> : <EyeIcon className="h-5 w-5"/>}</button>
+                                <input type={showPasswords.confirm ? 'text' : 'password'} id="confirmPassword" name="confirmPassword" value={passwordData.confirmPassword} onChange={handlePasswordChange} className="w-full pr-10 py-2 border rounded-md bg-white dark:bg-stone-700 border-stone-300 dark:border-stone-600 text-stone-900 dark:text-white" />
+                                <button type="button" onClick={() => toggleShowPassword('confirm')} className="absolute inset-y-0 right-0 pr-3 flex items-center text-stone-500">{showPasswords.confirm ? <EyeSlashIcon className="h-5 w-5"/> : <EyeIcon className="h-5 w-5"/>}</button>
                            </div>
                         </div>
                     </div>
                      <div className="text-right pt-4">
-                        <button type="submit" className="bg-indigo-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-indigo-700 transition-colors">
+                        <button type="submit" className="bg-rose-600 text-white font-semibold py-2 px-6 rounded-md hover:bg-rose-700 transition-colors">
                             Update Password
                         </button>
                     </div>

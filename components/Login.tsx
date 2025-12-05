@@ -58,15 +58,15 @@ const Login: React.FC = () => {
   };
   
   return (
-    <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 min-h-screen bg-gray-50 dark:bg-slate-900">
+    <div className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 min-h-screen bg-stone-50 dark:bg-stone-900 transition-colors duration-200">
       <div className="max-w-md w-full space-y-8">
-        <h1 className="text-center font-serif text-4xl font-bold text-gray-800 dark:text-white">ChicChariot</h1>
-        <div className="p-10 bg-white dark:bg-slate-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+        <h1 className="text-center font-serif text-4xl font-bold text-stone-800 dark:text-white">ChicChariot</h1>
+        <div className="p-10 bg-white dark:bg-stone-800 rounded-xl shadow-lg border border-stone-200 dark:border-stone-700">
           <div>
-            <h2 className="text-center text-3xl font-bold text-gray-900 dark:text-white">
+            <h2 className="text-center text-3xl font-bold text-stone-900 dark:text-white">
               {isLoginView ? 'Login' : 'Sign Up'}
             </h2>
-            <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
+            <p className="mt-2 text-center text-sm text-stone-600 dark:text-stone-400">
               {isLoginView ? 'Access your account and track your orders' : 'Create an account to get started'}
             </p>
           </div>
@@ -74,7 +74,7 @@ const Login: React.FC = () => {
           <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
             <div className="space-y-5">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label htmlFor="email" className="block text-sm font-medium text-stone-700 dark:text-stone-300">
                   Email
                 </label>
                 <div className="mt-1">
@@ -84,7 +84,7 @@ const Login: React.FC = () => {
                     type="text"
                     autoComplete="email"
                     required
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                    className="appearance-none block w-full px-3 py-2 border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-700 text-stone-900 dark:text-white rounded-md shadow-sm placeholder-stone-400 dark:placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 sm:text-sm"
                     placeholder="you@example.com"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
@@ -92,7 +92,7 @@ const Login: React.FC = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="password-input" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                <label htmlFor="password-input" className="block text-sm font-medium text-stone-700 dark:text-stone-300">
                   Password
                 </label>
                 <div className="mt-1 relative">
@@ -102,14 +102,14 @@ const Login: React.FC = () => {
                     type={showPassword ? 'text' : 'password'}
                     autoComplete="current-password"
                     required
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white rounded-md shadow-sm placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:text-sm"
+                    className="appearance-none block w-full px-3 py-2 border border-stone-300 dark:border-stone-600 bg-white dark:bg-stone-700 text-stone-900 dark:text-white rounded-md shadow-sm placeholder-stone-400 dark:placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 sm:text-sm"
                     placeholder="Your password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <button
                     type="button"
-                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-stone-400 hover:text-stone-600 dark:text-stone-500 dark:hover:text-stone-300"
                     onClick={() => setShowPassword(!showPassword)}
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                   >
@@ -134,7 +134,7 @@ const Login: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-indigo-400 disabled:cursor-not-allowed"
+                className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-rose-600 hover:bg-rose-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-500 disabled:bg-rose-400 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
                   <>
@@ -151,9 +151,9 @@ const Login: React.FC = () => {
             </div>
           </form>
 
-          <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
+          <p className="mt-6 text-center text-sm text-stone-600 dark:text-stone-400">
               {isLoginView ? "Don't have an account?" : "Already have an account?"}{' '}
-              <button onClick={handleToggleView} className="font-medium text-indigo-600 hover:text-indigo-500 dark:text-indigo-400 dark:hover:text-indigo-300 focus:outline-none">
+              <button onClick={handleToggleView} className="font-medium text-rose-600 hover:text-rose-500 dark:text-rose-400 dark:hover:text-rose-300 focus:outline-none">
                 {isLoginView ? 'Sign up' : 'Login'}
               </button>
           </p>

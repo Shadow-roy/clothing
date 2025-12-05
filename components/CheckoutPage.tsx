@@ -5,7 +5,6 @@ import { useNavigation } from '../contexts/NavigationContext';
 import { useToasts } from '../contexts/ToastContext';
 import { useItems } from '../contexts/ItemsContext';
 import { useAuth } from '../contexts/AuthContext';
-// Fix: Import useNotifications to add a notification on new order.
 import { useNotifications } from '../contexts/NotificationContext';
 import { UserIcon } from './icons/UserIcon';
 import { PhoneIcon } from './icons/PhoneIcon';
@@ -15,7 +14,6 @@ import { WalletIcon } from './icons/WalletIcon';
 import { CashIcon } from './icons/CashIcon';
 import { Order, CustomerDetails } from '../types';
 
-// Moved InputField outside to prevent re-creation on parent render, which caused focus loss.
 const InputField: React.FC<{
   name: keyof Omit<CustomerDetails, 'email'>;
   label: string;
@@ -26,7 +24,7 @@ const InputField: React.FC<{
   type?: string;
 }> = ({ name, label, icon, value, onChange, error, type = 'text' }) => (
   <div>
-    <label htmlFor={name} className="block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
+    <label htmlFor={name} className="block text-sm font-medium text-stone-700 dark:text-stone-300">{label}</label>
     <div className="relative mt-1">
       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
         {icon}
@@ -37,7 +35,7 @@ const InputField: React.FC<{
         name={name}
         value={value}
         onChange={onChange}
-        className={`w-full pl-10 pr-3 py-2 border rounded-md text-gray-900 bg-white dark:bg-gray-700 dark:text-white dark:border-gray-600 ${error ? 'border-red-500' : 'border-gray-300'}`}
+        className={`w-full pl-10 pr-3 py-2 border rounded-md text-stone-900 bg-white dark:bg-stone-700 dark:text-white dark:border-stone-600 ${error ? 'border-red-500' : 'border-stone-300'}`}
       />
     </div>
     {error && <p className="text-red-500 dark:text-red-400 text-xs mt-1">{error}</p>}
@@ -66,7 +64,6 @@ const CheckoutPage: React.FC = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    // Fix: Cast `name` to a key of `CustomerDetails` to allow dynamic property setting.
     setCustomer(prev => ({ ...prev, [name as keyof CustomerDetails]: value }));
     if(errors[name]) {
         setErrors(prev => {
@@ -108,7 +105,6 @@ const CheckoutPage: React.FC = () => {
     
     // Process order
     const newOrder = addOrder(cartItems, customer, paymentMethod);
-    // Fix: Add a notification for the new order.
     addNotification(newOrder);
 
     // Update stock
@@ -124,9 +120,9 @@ const CheckoutPage: React.FC = () => {
   if (cartItems.length === 0) {
     return (
       <div className="text-center py-20">
-        <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Your Cart is Empty</h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-2">Add items to your cart to proceed to checkout.</p>
-        <button onClick={() => navigate('store')} className="mt-6 bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700">
+        <h1 className="text-2xl font-bold text-stone-900 dark:text-white">Your Cart is Empty</h1>
+        <p className="text-stone-500 dark:text-stone-400 mt-2">Add items to your cart to proceed to checkout.</p>
+        <button onClick={() => navigate('store')} className="mt-6 bg-rose-600 text-white px-6 py-2 rounded-md hover:bg-rose-700">
           Go Shopping
         </button>
       </div>
@@ -146,55 +142,55 @@ const CheckoutPage: React.FC = () => {
   return (
     <form onSubmit={handlePlaceOrder} noValidate className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
       {/* Customer Details */}
-      <div className="lg:col-span-2 bg-white dark:bg-slate-800 p-8 rounded-lg shadow-md space-y-6 border border-gray-200 dark:border-gray-700">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white">Shipping Information</h2>
-        <InputField name="fullName" label="Full Name" icon={<UserIcon className="w-5 h-5 text-gray-400" />} value={customer.fullName} onChange={handleInputChange} error={errors.fullName} />
-        <InputField name="phone" label="Phone" type="tel" icon={<PhoneIcon className="w-5 h-5 text-gray-400" />} value={customer.phone} onChange={handleInputChange} error={errors.phone} />
-        <InputField name="address" label="Address" icon={<MapPinIcon className="w-5 h-5 text-gray-400" />} value={customer.address} onChange={handleInputChange} error={errors.address} />
+      <div className="lg:col-span-2 bg-white dark:bg-stone-800 p-8 rounded-lg shadow-md space-y-6 border border-stone-200 dark:border-stone-700">
+        <h2 className="text-2xl font-bold text-stone-900 dark:text-white">Shipping Information</h2>
+        <InputField name="fullName" label="Full Name" icon={<UserIcon className="w-5 h-5 text-stone-400" />} value={customer.fullName} onChange={handleInputChange} error={errors.fullName} />
+        <InputField name="phone" label="Phone" type="tel" icon={<PhoneIcon className="w-5 h-5 text-stone-400" />} value={customer.phone} onChange={handleInputChange} error={errors.phone} />
+        <InputField name="address" label="Address" icon={<MapPinIcon className="w-5 h-5 text-stone-400" />} value={customer.address} onChange={handleInputChange} error={errors.address} />
         
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white pt-4">Payment Method</h2>
+        <h2 className="text-2xl font-bold text-stone-900 dark:text-white pt-4">Payment Method</h2>
         <div className="flex flex-wrap gap-4">
             {paymentOptions.map(({ id, icon: Icon, label }) => (
-                 <button type="button" key={id} onClick={() => setPaymentMethod(id)} className={`flex items-center gap-2 px-4 py-2 border rounded-lg transition-colors ${paymentMethod === id ? 'bg-indigo-50 border-indigo-500 text-indigo-700 dark:bg-indigo-900/50 dark:border-indigo-500 dark:text-indigo-300' : 'border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700'}`}>
+                 <button type="button" key={id} onClick={() => setPaymentMethod(id)} className={`flex items-center gap-2 px-4 py-2 border rounded-lg transition-colors ${paymentMethod === id ? 'bg-rose-50 border-rose-500 text-rose-700 dark:bg-rose-900/50 dark:border-rose-500 dark:text-rose-300' : 'border-stone-300 dark:border-stone-600 text-stone-600 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700'}`}>
                     <Icon className="w-5 h-5" /> {label}
                 </button>
             ))}
         </div>
         
         {paymentMethod === 'Phone Pay' && (
-            <div className="text-center bg-gray-100 dark:bg-slate-700 p-6 rounded-lg">
+            <div className="text-center bg-stone-100 dark:bg-stone-700 p-6 rounded-lg">
                 <img src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=9980327249@kotak811`} alt="UPI QR Code" className="mx-auto rounded-md"/>
-                <p className="mt-4 text-gray-600 dark:text-gray-400">Scan the QR code with your favorite payment app to complete the purchase.</p>
+                <p className="mt-4 text-stone-600 dark:text-stone-400">Scan the QR code with your favorite payment app to complete the purchase.</p>
             </div>
         )}
       </div>
 
       {/* Order Summary */}
-      <div className="bg-white dark:bg-slate-800 p-8 rounded-lg shadow-md lg:col-span-1 h-fit sticky top-28 border border-gray-200 dark:border-gray-700">
-        <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">Order Summary</h2>
+      <div className="bg-white dark:bg-stone-800 p-8 rounded-lg shadow-md lg:col-span-1 h-fit sticky top-28 border border-stone-200 dark:border-stone-700">
+        <h2 className="text-2xl font-bold text-stone-900 dark:text-white mb-6">Order Summary</h2>
         <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
             {cartItems.map(item => (
                 <div key={item.id} className="flex justify-between items-start gap-4 text-sm">
                     <div className="flex gap-3">
                         <img src={item.imageURL} alt={item.name} className="w-12 h-12 rounded-md object-cover"/>
                         <div>
-                           <p className="font-semibold text-gray-800 dark:text-gray-200">{item.name}</p>
-                           <p className="text-gray-500 dark:text-gray-400">Qty: {item.quantity}</p>
+                           <p className="font-semibold text-stone-800 dark:text-stone-200">{item.name}</p>
+                           <p className="text-stone-500 dark:text-stone-400">Qty: {item.quantity}</p>
                         </div>
                     </div>
-                    <span className="font-medium text-gray-800 dark:text-gray-200 whitespace-nowrap">₹{(item.price * item.quantity).toFixed(2)}</span>
+                    <span className="font-medium text-stone-800 dark:text-stone-200 whitespace-nowrap">₹{(item.price * item.quantity).toFixed(2)}</span>
                 </div>
             ))}
         </div>
-        <div className="border-t border-gray-200 dark:border-gray-700 mt-6 pt-6 space-y-2">
-            <div className="flex justify-between text-sm"><span className="text-gray-600 dark:text-gray-400">Subtotal</span><span className="text-gray-800 dark:text-gray-200">₹{subtotal.toFixed(2)}</span></div>
-            <div className="flex justify-between text-sm"><span className="text-gray-600 dark:text-gray-400">Shipping</span><span className="text-gray-800 dark:text-gray-200">₹{shipping.toFixed(2)}</span></div>
-            <div className="flex justify-between font-bold text-lg mt-2"><span className="text-gray-900 dark:text-white">Total</span><span className="text-slate-700 dark:text-slate-200">₹{total.toFixed(2)}</span></div>
+        <div className="border-t border-stone-200 dark:border-stone-700 mt-6 pt-6 space-y-2">
+            <div className="flex justify-between text-sm"><span className="text-stone-600 dark:text-stone-400">Subtotal</span><span className="text-stone-800 dark:text-stone-200">₹{subtotal.toFixed(2)}</span></div>
+            <div className="flex justify-between text-sm"><span className="text-stone-600 dark:text-stone-400">Shipping</span><span className="text-stone-800 dark:text-stone-200">₹{shipping.toFixed(2)}</span></div>
+            <div className="flex justify-between font-bold text-lg mt-2"><span className="text-stone-900 dark:text-white">Total</span><span className="text-stone-700 dark:text-stone-200">₹{total.toFixed(2)}</span></div>
         </div>
          <button 
             type="submit"
             disabled={!isFormValid}
-            className="w-full mt-8 flex items-center justify-center gap-2 bg-indigo-600 text-white font-semibold py-3 rounded-md hover:bg-indigo-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+            className="w-full mt-8 flex items-center justify-center gap-2 bg-rose-600 text-white font-semibold py-3 rounded-md hover:bg-rose-700 transition-colors disabled:bg-stone-400 disabled:cursor-not-allowed"
         >
             <LockClosedIcon className="w-5 h-5"/> Place Order (₹{total.toFixed(2)})
         </button>

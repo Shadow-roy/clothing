@@ -32,30 +32,32 @@ const CategoryFilter: React.FC<CategoryFilterProps> = ({ categories, selectedCat
     <div className="relative" ref={wrapperRef}>
       <button
         type="button"
-        className={`flex items-center justify-between gap-2 w-full px-4 py-3 bg-white dark:bg-gray-700 text-slate-800 dark:text-slate-100 rounded-lg shadow-sm border border-gray-300 dark:border-gray-600 hover:border-gray-400 dark:hover:border-gray-500 transition-all focus:outline-none ${isOpen ? 'ring-2 ring-indigo-500' : 'focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500'}`}
+        className={`flex items-center justify-between gap-2 w-full px-4 py-3 bg-white/50 dark:bg-stone-700/50 text-stone-800 dark:text-stone-100 rounded-xl hover:bg-white/80 dark:hover:bg-stone-700/80 transition-all focus:outline-none`}
         onClick={() => setIsOpen(!isOpen)}
       >
-        <TagIcon className="w-5 h-5 text-gray-400 dark:text-gray-500" />
-        <span className="font-semibold text-slate-700 dark:text-slate-200 flex-1 text-left">{selectedCategory}</span>
-        <ChevronDownIcon className={`w-5 h-5 text-gray-500 dark:text-gray-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <div className="flex items-center gap-2">
+            <TagIcon className="w-4 h-4 text-stone-400 dark:text-stone-500" />
+            <span className="font-medium text-stone-700 dark:text-stone-200 text-sm">{selectedCategory}</span>
+        </div>
+        <ChevronDownIcon className={`w-4 h-4 text-stone-500 dark:text-stone-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
-        <div className="absolute mt-2 w-full rounded-xl bg-white dark:bg-slate-800 border border-gray-200 dark:border-gray-700 shadow-lg z-20 ring-1 ring-black ring-opacity-5 focus:outline-none max-h-60 overflow-auto">
-          <ul className="py-2">
+        <div className="absolute top-full left-0 mt-2 w-full sm:w-56 rounded-xl bg-white/90 dark:bg-stone-800/90 backdrop-blur-xl border border-stone-200/50 dark:border-stone-700/50 shadow-xl z-50 overflow-hidden ring-1 ring-black/5">
+          <ul className="py-1 max-h-60 overflow-auto custom-scrollbar">
             {categories.map(category => {
                 const isSelected = selectedCategory === category;
                 return (
                     <li
                         key={category}
-                        className={`flex items-center justify-between cursor-pointer select-none px-4 py-3 text-sm transition-colors ${isSelected ? 'bg-indigo-50 dark:bg-indigo-900/50' : 'text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-slate-700'}`}
+                        className={`flex items-center justify-between cursor-pointer select-none px-4 py-2.5 text-sm transition-colors ${isSelected ? 'bg-rose-50 dark:bg-rose-900/30 text-rose-700 dark:text-rose-300' : 'text-stone-700 dark:text-stone-200 hover:bg-stone-100 dark:hover:bg-stone-700/50'}`}
                         onClick={() => handleSelect(category)}
                     >
-                        <span className={`block truncate ${isSelected ? 'font-semibold text-indigo-600 dark:text-indigo-400' : 'font-normal'}`}>
+                        <span className={`block truncate ${isSelected ? 'font-semibold' : 'font-normal'}`}>
                         {category}
                         </span>
                         {isSelected && (
-                        <CheckIcon className="h-5 w-5 text-indigo-600 dark:text-indigo-400" />
+                        <CheckIcon className="h-4 w-4 text-rose-600 dark:text-rose-400" />
                         )}
                     </li>
                 );
