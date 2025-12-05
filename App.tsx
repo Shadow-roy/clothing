@@ -40,12 +40,20 @@ function App() {
       <NavigationProvider>
         <NotificationProvider>
           {/* Main Background with Gradients for Glassmorphism */}
-          <div className="min-h-screen font-sans transition-colors duration-200 relative bg-stone-50 dark:bg-stone-950">
-              {/* Background Orbs */}
-              <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-                  <div className="absolute top-0 left-1/4 w-96 h-96 bg-rose-200/30 dark:bg-rose-900/10 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob"></div>
-                  <div className="absolute top-0 right-1/4 w-96 h-96 bg-stone-200/40 dark:bg-stone-800/20 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-2000"></div>
-                  <div className="absolute -bottom-8 left-1/3 w-96 h-96 bg-rose-100/30 dark:bg-rose-900/10 rounded-full mix-blend-multiply dark:mix-blend-screen filter blur-3xl opacity-70 animate-blob animation-delay-4000"></div>
+          <div className="min-h-screen font-sans transition-colors duration-200 relative bg-stone-50 dark:bg-black text-stone-900 dark:text-stone-100">
+              {/* Abstract Gradient Background matching the image */}
+              <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+                  {/* Top Left - Cyan/Teal */}
+                  <div className="absolute -top-[10%] -left-[10%] w-[60vw] h-[60vh] bg-teal-500/20 dark:bg-teal-500/15 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob"></div>
+                  
+                  {/* Top Right - Red/Rose */}
+                  <div className="absolute -top-[10%] -right-[10%] w-[60vw] h-[60vh] bg-rose-600/20 dark:bg-rose-600/15 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000"></div>
+
+                  {/* Bottom Left - Orange */}
+                  <div className="absolute -bottom-[20%] -left-[10%] w-[60vw] h-[60vh] bg-orange-500/20 dark:bg-orange-600/15 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-4000"></div>
+
+                  {/* Bottom Right - Blue */}
+                  <div className="absolute -bottom-[10%] -right-[10%] w-[60vw] h-[60vh] bg-blue-600/20 dark:bg-blue-700/15 rounded-full blur-[100px] mix-blend-multiply dark:mix-blend-screen animate-blob"></div>
               </div>
 
               {/* Content Wrapper */}
@@ -133,7 +141,7 @@ const Header: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const textButtonClass = "text-sm font-medium text-stone-600 hover:text-rose-600 dark:text-stone-300 dark:hover:text-rose-400 transition-colors";
-  const iconButtonClass = "relative text-stone-500 hover:text-rose-600 dark:text-stone-400 dark:hover:text-rose-400 transition-colors p-2 rounded-full hover:bg-stone-100/50 dark:hover:bg-stone-700/50";
+  const iconButtonClass = "relative text-stone-500 hover:text-rose-600 dark:text-stone-400 dark:hover:text-rose-400 transition-colors p-2 rounded-full hover:bg-stone-100/50 dark:hover:bg-white/10";
 
   const handleMobileNav = (action: () => void) => {
       action();
@@ -141,58 +149,54 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="bg-white/70 dark:bg-stone-900/70 backdrop-blur-xl border-b border-white/20 dark:border-stone-800 shadow-sm sticky top-0 z-40 transition-colors duration-200">
+    <header className="bg-white/70 dark:bg-black/50 backdrop-blur-xl border-b border-white/20 dark:border-stone-800 shadow-sm sticky top-0 z-40 transition-colors duration-200">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center">
+          {/* LEFT: Logo */}
+          <div className="flex items-center flex-shrink-0">
             <h1 onClick={() => navigate('store')} className="text-stone-800 dark:text-white text-2xl font-bold cursor-pointer font-serif tracking-tight">ChicChariot</h1>
           </div>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-2 sm:gap-4">
-             <button onClick={openHistory} className={textButtonClass}>Orders</button>
-             {isLoggedIn ? (
-                <>
-                  <button onClick={() => navigate('profile')} className={page === 'profile' ? 'text-sm font-medium text-rose-600 dark:text-rose-400' : textButtonClass}>Account</button>
-                  {isAdmin && <button onClick={() => navigate('admin')} className={page === 'admin' ? 'text-sm font-medium text-rose-600 dark:text-rose-400' : textButtonClass}>Admin</button>}
-                  <button onClick={logout} className={textButtonClass}>Logout</button>
-                </>
-             ) : (
-                <button onClick={() => navigate('login')} className="bg-rose-600/90 hover:bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-rose-200 dark:shadow-none backdrop-blur-sm">Login</button>
-             )}
-             <div className="h-6 w-px bg-stone-300 dark:bg-stone-700 hidden sm:block"></div>
-            <button onClick={openWishlist} className={iconButtonClass}>
-                <HeartOutlineIcon className="h-6 w-6" />
-                {wishlistItemCount > 0 && (
-                    <span className="absolute top-0 right-0 flex items-center justify-center h-4 w-4 bg-rose-500 text-white text-[10px] rounded-full ring-2 ring-white dark:ring-stone-900">{wishlistItemCount}</span>
-                )}
-            </button>
-            <button onClick={openCart} className={iconButtonClass}>
-                <ShoppingCartIcon className="h-6 w-6" />
-                {cartItemCount > 0 && (
-                    <span className="absolute top-0 right-0 flex items-center justify-center h-4 w-4 bg-rose-500 text-white text-[10px] rounded-full ring-2 ring-white dark:ring-stone-900">{cartItemCount}</span>
-                )}
-            </button>
-             <button onClick={toggleTheme} className={iconButtonClass} aria-label="Toggle theme">
-              {theme === 'light' ? <MoonIcon className="h-6 w-6" /> : <SunIcon className="h-6 w-6" />}
-            </button>
-          </nav>
+          {/* RIGHT SIDE: Navigation + Icons */}
+          <div className="flex items-center gap-2 md:gap-6">
+              {/* Desktop Navigation Links */}
+             <nav className="hidden md:flex items-center gap-6">
+                 <button onClick={openHistory} className={textButtonClass}>Orders</button>
+                 {isLoggedIn ? (
+                    <>
+                      <button onClick={() => navigate('profile')} className={page === 'profile' ? 'text-sm font-medium text-rose-600 dark:text-rose-400' : textButtonClass}>Account</button>
+                      {isAdmin && <button onClick={() => navigate('admin')} className={page === 'admin' ? 'text-sm font-medium text-rose-600 dark:text-rose-400' : textButtonClass}>Admin</button>}
+                      <button onClick={logout} className={textButtonClass}>Logout</button>
+                    </>
+                 ) : (
+                    <button onClick={() => navigate('login')} className="bg-rose-600/90 hover:bg-rose-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition shadow-lg shadow-rose-200 dark:shadow-none backdrop-blur-sm">Login</button>
+                 )}
+             </nav>
+             
+             {/* Divider (Desktop Only) */}
+             <div className="hidden md:block h-6 w-px bg-stone-300 dark:bg-stone-700"></div>
 
-          {/* Mobile Navigation Icons & Menu Toggle */}
-          <div className="flex md:hidden items-center gap-1">
-             <button onClick={openWishlist} className={iconButtonClass}>
-                <HeartOutlineIcon className="h-6 w-6" />
-                {wishlistItemCount > 0 && (
-                    <span className="absolute top-0 right-0 flex items-center justify-center h-3 w-3 bg-rose-500 text-white text-[9px] rounded-full ring-1 ring-white dark:ring-stone-900">{wishlistItemCount}</span>
-                )}
-            </button>
-            <button onClick={openCart} className={iconButtonClass}>
-                <ShoppingCartIcon className="h-6 w-6" />
-                {cartItemCount > 0 && (
-                    <span className="absolute top-0 right-0 flex items-center justify-center h-3 w-3 bg-rose-500 text-white text-[9px] rounded-full ring-1 ring-white dark:ring-stone-900">{cartItemCount}</span>
-                )}
-            </button>
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-stone-600 dark:text-stone-300">
+             {/* Icons (Visible on all screens) */}
+             <div className="flex items-center gap-2">
+                <button onClick={openWishlist} className={iconButtonClass} aria-label="Wishlist">
+                    <HeartOutlineIcon className="h-6 w-6" />
+                    {wishlistItemCount > 0 && (
+                        <span className="absolute top-0 right-0 flex items-center justify-center h-4 w-4 bg-rose-500 text-white text-[10px] rounded-full ring-2 ring-white dark:ring-stone-900">{wishlistItemCount}</span>
+                    )}
+                </button>
+                <button onClick={openCart} className={iconButtonClass} aria-label="Cart">
+                    <ShoppingCartIcon className="h-6 w-6" />
+                    {cartItemCount > 0 && (
+                        <span className="absolute top-0 right-0 flex items-center justify-center h-4 w-4 bg-rose-500 text-white text-[10px] rounded-full ring-2 ring-white dark:ring-stone-900">{cartItemCount}</span>
+                    )}
+                </button>
+                 <button onClick={toggleTheme} className={iconButtonClass} aria-label="Toggle theme">
+                  {theme === 'light' ? <MoonIcon className="h-6 w-6" /> : <SunIcon className="h-6 w-6" />}
+                </button>
+             </div>
+            
+            {/* Hamburger for Mobile */}
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="md:hidden p-2 text-stone-600 dark:text-stone-300 ml-1">
                 {isMobileMenuOpen ? <XMarkIcon className="w-6 h-6" /> : <Bars3Icon className="w-6 h-6" />}
             </button>
           </div>
@@ -212,12 +216,6 @@ const Header: React.FC = () => {
              ) : (
                 <button onClick={() => handleMobileNav(() => navigate('login'))} className="text-center py-2 px-4 bg-rose-600 text-white rounded-lg font-semibold">Login</button>
              )}
-             <div className="border-t border-stone-200 dark:border-stone-700 pt-3 flex items-center justify-between px-4">
-                 <span className="text-sm font-medium text-stone-600 dark:text-stone-400">Appearance</span>
-                 <button onClick={toggleTheme} className="p-2 rounded-full bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300">
-                     {theme === 'light' ? <MoonIcon className="h-5 w-5" /> : <SunIcon className="h-5 w-5" />}
-                 </button>
-             </div>
           </div>
       )}
     </header>
