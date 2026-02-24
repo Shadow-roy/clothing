@@ -7,7 +7,7 @@ export const CURRENT_USER_KEY = 'groceryGlossCurrentUser';
 export const INITIAL_USERS: User[] = [
   {
     id: 'admin-1',
-    username: 'sagar',
+    username: 'sanjay',
     password: '123',
     role: 'admin',
     provider: 'credentials',
