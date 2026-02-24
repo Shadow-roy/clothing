@@ -1,12 +1,9 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+
 
 # 👗 ChicChariot — Women's Fashion E-Commerce Store
 
 A premium women's fashion e-commerce web application built with **React 19**, **TypeScript**, **Vite**, and **Tailwind CSS**. It features a beautiful storefront for customers and a powerful admin dashboard for complete store management — all running in the browser with `localStorage` persistence.
 
-View your app in AI Studio: https://ai.studio/apps/03311590-a311-4518-8271-cace75442c7a
 
 ---
 
@@ -160,6 +157,3 @@ All data (products, orders, cart, wishlist, reviews, users, notifications) is st
 
 ---
 
-<div align="center">
-<b>Made with ❤️ using React + TypeScript</b>
-</div>
