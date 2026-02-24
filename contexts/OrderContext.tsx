@@ -1,5 +1,5 @@
 
-import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useEffect, useContext, ReactNode, useRef } from 'react';
 import { Order, CartItem, CustomerDetails } from '../types';
 
 interface OrderContextState {
@@ -14,18 +14,28 @@ interface OrderContextState {
 const OrderContext = createContext<OrderContextState | undefined>(undefined);
 
 export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [orders, setOrders] = useState<Order[]>([]);
+  const isInitialized = useRef(false);
+
+  const [orders, setOrders] = useState<Order[]>(() => {
+    try {
+      const storedOrders = localStorage.getItem('glossaryOrders');
+      if (storedOrders) {
+        const parsed = JSON.parse(storedOrders);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch { /* ignore */ }
+    return [];
+  });
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
   useEffect(() => {
-    const storedOrders = localStorage.getItem('glossaryOrders');
-    if (storedOrders) {
-      setOrders(JSON.parse(storedOrders));
-    }
+    isInitialized.current = true;
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('glossaryOrders', JSON.stringify(orders));
+    if (isInitialized.current) {
+      localStorage.setItem('glossaryOrders', JSON.stringify(orders));
+    }
   }, [orders]);
 
   const addOrder = (items: CartItem[], customer: CustomerDetails, paymentMethod: Order['paymentMethod'], paymentProof?: string): Order => {

@@ -1,5 +1,7 @@
-import React, { createContext, useState, useContext, ReactNode, useMemo } from 'react';
+import React, { createContext, useState, useContext, ReactNode, useMemo, useEffect, useRef } from 'react';
 import { GlossaryItem, CartItem } from '../types';
+
+const CART_KEY = 'chicChariotCart';
 
 interface CartContextState {
   cartItems: CartItem[];
@@ -16,8 +18,29 @@ interface CartContextState {
 const CartContext = createContext<CartContextState | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const isInitialized = useRef(false);
+
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    try {
+      const stored = localStorage.getItem(CART_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch { /* ignore */ }
+    return [];
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
+
+  useEffect(() => {
+    isInitialized.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (isInitialized.current) {
+      localStorage.setItem(CART_KEY, JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
 
   const addToCart = (item: GlossaryItem) => {
     setCartItems(prev => {
@@ -35,10 +58,10 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       removeFromCart(id);
     } else {
       setCartItems(prev => prev.map(item => {
-        if(item.id === id) {
-            // Ensure quantity does not exceed stock
-            const newQuantity = Math.min(quantity, item.stock);
-            return { ...item, quantity: newQuantity };
+        if (item.id === id) {
+          // Ensure quantity does not exceed stock
+          const newQuantity = Math.min(quantity, item.stock);
+          return { ...item, quantity: newQuantity };
         }
         return item;
       }));
@@ -48,7 +71,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const removeFromCart = (id: string) => {
     setCartItems(prev => prev.filter(item => item.id !== id));
   };
-  
+
   const clearCart = () => {
     setCartItems([]);
   };

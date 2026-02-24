@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect, useContext, ReactNode } from 'react';
+import React, { createContext, useState, useEffect, useContext, ReactNode, useRef } from 'react';
 import { GlossaryItem } from '../types';
 import { INITIAL_ITEMS, INITIAL_CATEGORIES } from '../constants';
 
@@ -16,28 +16,44 @@ interface ItemsContextState {
 const ItemsContext = createContext<ItemsContextState | undefined>(undefined);
 
 export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [items, setItems] = useState<GlossaryItem[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
+  const isInitialized = useRef(false);
+
+  const [items, setItems] = useState<GlossaryItem[]>(() => {
+    try {
+      const storedItems = localStorage.getItem('glossaryItems');
+      if (storedItems) {
+        const parsed = JSON.parse(storedItems);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch { /* ignore */ }
+    return INITIAL_ITEMS;
+  });
+
+  const [categories, setCategories] = useState<string[]>(() => {
+    try {
+      const storedCategories = localStorage.getItem('glossaryCategories');
+      if (storedCategories) {
+        const parsed = JSON.parse(storedCategories);
+        if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+      }
+    } catch { /* ignore */ }
+    return INITIAL_CATEGORIES;
+  });
 
   useEffect(() => {
-    const storedItems = localStorage.getItem('glossaryItems');
-    const storedCategories = localStorage.getItem('glossaryCategories');
-
-    if (storedItems && storedCategories) {
-      setItems(JSON.parse(storedItems));
-      setCategories(JSON.parse(storedCategories));
-    } else {
-      setItems(INITIAL_ITEMS);
-      setCategories(INITIAL_CATEGORIES);
-    }
+    isInitialized.current = true;
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('glossaryItems', JSON.stringify(items));
+    if (isInitialized.current) {
+      localStorage.setItem('glossaryItems', JSON.stringify(items));
+    }
   }, [items]);
 
   useEffect(() => {
-    localStorage.setItem('glossaryCategories', JSON.stringify(categories));
+    if (isInitialized.current) {
+      localStorage.setItem('glossaryCategories', JSON.stringify(categories));
+    }
   }, [categories]);
 
   const addItem = (item: Omit<GlossaryItem, 'id'>) => {
@@ -75,9 +91,9 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   const updateCategory = (oldName: string, newName: string): { success: boolean; message?: string } => {
     const trimmedNewName = newName.trim();
     if (!trimmedNewName) {
-        return { success: false, message: 'Category name cannot be empty.' };
+      return { success: false, message: 'Category name cannot be empty.' };
     }
-    
+
     const categoryExists = categories.some(
       (c) => c.toLowerCase() === trimmedNewName.toLowerCase() && c.toLowerCase() !== oldName.toLowerCase()
     );
@@ -85,7 +101,7 @@ export const ItemsProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     if (categoryExists) {
       return { success: false, message: `Category "${trimmedNewName}" already exists.` };
     }
-    
+
     setCategories(prev => prev.map(c => c === oldName ? trimmedNewName : c));
     setItems(prev => prev.map(item => item.category === oldName ? { ...item, category: trimmedNewName } : item));
     return { success: true };

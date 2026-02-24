@@ -1,6 +1,8 @@
 
-import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
+import React, { createContext, useState, useEffect, useContext, ReactNode, useCallback, useRef } from 'react';
 import { Order } from '../types';
+
+const NOTIFICATIONS_KEY = 'chicChariotNotifications';
 
 export interface Notification {
     id: number;
@@ -11,21 +13,42 @@ export interface Notification {
 }
 
 interface NotificationContextState {
-  notifications: Notification[];
-  unreadCount: number;
-  isPanelOpen: boolean;
-  addNotification: (order: Order) => void;
-  markAsRead: (id: number) => void;
-  markAllAsRead: () => void;
-  togglePanel: () => void;
-  closePanel: () => void;
+    notifications: Notification[];
+    unreadCount: number;
+    isPanelOpen: boolean;
+    addNotification: (order: Order) => void;
+    markAsRead: (id: number) => void;
+    markAllAsRead: () => void;
+    togglePanel: () => void;
+    closePanel: () => void;
 }
 
 const NotificationContext = createContext<NotificationContextState | undefined>(undefined);
 
 export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [notifications, setNotifications] = useState<Notification[]>([]);
+    const isInitialized = useRef(false);
+
+    const [notifications, setNotifications] = useState<Notification[]>(() => {
+        try {
+            const stored = localStorage.getItem(NOTIFICATIONS_KEY);
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                if (Array.isArray(parsed)) return parsed;
+            }
+        } catch { /* ignore */ }
+        return [];
+    });
     const [isPanelOpen, setIsPanelOpen] = useState(false);
+
+    useEffect(() => {
+        isInitialized.current = true;
+    }, []);
+
+    useEffect(() => {
+        if (isInitialized.current) {
+            localStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(notifications));
+        }
+    }, [notifications]);
 
     const addNotification = useCallback((order: Order) => {
         const newNotification: Notification = {
@@ -48,7 +71,7 @@ export const NotificationProvider: React.FC<{ children: ReactNode }> = ({ childr
 
     const togglePanel = () => setIsPanelOpen(prev => !prev);
     const closePanel = () => setIsPanelOpen(false);
-    
+
     const unreadCount = notifications.filter(n => !n.read).length;
 
     return (
